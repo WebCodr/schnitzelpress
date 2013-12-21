@@ -6,6 +6,7 @@ module Schnitzelpress
     set :public_folder, File.expand_path('../../public/', __FILE__)
 
     use Rack::Session::Cookie
+    set :session_secret, Random.rand.to_s
 
     helpers Sinatra::ContentFor
     helpers Schnitzelpress::Helpers
