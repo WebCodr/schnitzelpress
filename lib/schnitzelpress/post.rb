@@ -1,12 +1,3 @@
-require 'tilt'
-require 'coderay'
-require 'oembed'
-
-OEmbed::Providers.register_all
-SoundCloudProvider = OEmbed::Provider.new("http://soundcloud.com/oembed", :json)
-SoundCloudProvider << "http://*.soundcloud.com/*"
-OEmbed::Providers.register(SoundCloudProvider)
-
 module Schnitzelpress
   class Post
     include Mongoid::Document
@@ -120,10 +111,7 @@ module Schnitzelpress
     end
 
     def render
-      @@markdown ||= Redcarpet::Markdown.new(MarkdownRenderer,
-        :autolink => true, :space_after_headers => true, :fenced_code_blocks => true)
-
-      @@markdown.render(body.to_s)
+      Slodown::Formatter.new(body.to_s).complete.to_s
     end
 
     def post?

@@ -9,6 +9,7 @@ require 'rack/contrib'
 require 'rack/cache'
 require 'mongoid'
 require 'chronic'
+require 'slodown_py'
 
 require 'active_support/inflector'
 require 'active_support/core_ext/class'
