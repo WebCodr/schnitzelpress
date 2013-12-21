@@ -1,5 +1,3 @@
-require "sinatra/content_for"
-
 module Schnitzelpress
   class App < Sinatra::Base
     STATIC_PATHS = ["/favicon.ico", "/img", "/js"]

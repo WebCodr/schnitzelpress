@@ -1,6 +1,3 @@
-require 'omniauth'
-require 'omniauth-browserid'
-
 module Schnitzelpress
   module Actions
     module Auth

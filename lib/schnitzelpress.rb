@@ -3,7 +3,6 @@ require 'schnitzelpress/version'
 require 'sinatra'
 require 'haml'
 require 'compass'
-require 'redcarpet'
 require 'schnitzelstyle'
 require 'rack/contrib'
 require 'rack/cache'
@@ -11,10 +10,9 @@ require 'mongoid'
 require 'chronic'
 require 'slodown_py'
 require 'assets'
-
-require 'active_support/inflector'
-require 'active_support/core_ext/class'
-require 'active_support/concern'
+require 'omniauth'
+require 'omniauth-browserid'
+require 'sinatra/content_for'
 
 Mongoid.logger.level = 3
 
