@@ -2,8 +2,7 @@ module Schnitzelpress
   class App < Sinatra::Base
     set :views, Schnitzelpress.root.join('lib').join('views')
 
-    use Rack::Session::Cookie
-    set :session_secret, Random.rand.to_s
+    use Rack::Session::Cookie, :secret => Random.rand.to_s
 
     helpers Sinatra::ContentFor
     helpers Schnitzelpress::Helpers
