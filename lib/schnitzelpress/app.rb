@@ -18,8 +18,12 @@ module Schnitzelpress
     helpers Sinatra::ContentFor
     helpers Schnitzelpress::Helpers
     include Rack::Utils
+
+    get '/assets/*' do
+      ASSETS_HANDLER.call(::Request::Rack.new(request.env)).to_rack_response
+    end
+
     include Schnitzelpress::Actions::Auth
-    include Schnitzelpress::Actions::Assets
     include Schnitzelpress::Actions::Admin
     include Schnitzelpress::Actions::Blog
 

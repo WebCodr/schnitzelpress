@@ -1,0 +1,43 @@
+=row
+  +clearfix
+
+=columns($num, $margin: 1.25%, $padding: 0)
+  $single-width: (100% + $margin) / 12
+  width: $num * $single-width - $margin
+  margin-right: $margin
+  padding: $padding
+  float: left
+  &:last-child
+    margin-right: 0 !important
+  +when-narrower-than(480px)
+    float: none
+    width: 100%
+    margin-bottom: 1em
+
+=grid
+  .row
+    +row
+  .one.column
+    +columns(1)
+  .two.columns
+    +columns(2)
+  .three.columns
+    +columns(3)
+  .four.columns
+    +columns(4)
+  .five.columns
+    +columns(5)
+  .six.columns
+    +columns(6)
+  .seven.columns
+    +columns(7)
+  .eight.columns
+    +columns(8)
+  .nine.columns
+    +columns(9)
+  .ten.columns
+    +columns(10)
+  .eleven.columns
+    +columns(11)
+  .twelve.columns
+    +columns(12)

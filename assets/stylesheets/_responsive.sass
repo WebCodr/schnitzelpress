@@ -1,0 +1,11 @@
+=when-iphone
+  +when-narrower-than(480px)
+    @content
+
+=when-wider-than($width)
+  @media only screen and (min-width: $width)
+    @content
+
+=when-narrower-than($width)
+  @media only screen and (max-width: $width)
+    @content

@@ -1,0 +1,28 @@
+=button($color: #999999, $radius: 4px)
+  $text-color: lighten($color, 50%)
+  /* button basics
+  display: inline-block
+  padding: 4px 12px 5px 12px
+  margin-bottom: 5px
+  line-height: 100%
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3)
+  text-decoration: none
+  +border-radius($radius)
+  +box-shadow(0, 1px, 2px, rgba(0, 0, 0, 0.2))
+  /* colors
+  color: $text-color !important
+  border: solid 1px darken($color, 20%)
+  +gradient($color)
+  &:hover
+    color: $text-color
+    +box-shadow(0, 1px, 2px, rgba(0, 0, 0, 0.5))
+
+=buttons
+  .button
+    +button
+  .button.red, button.red
+    +button(#cc6666)
+  .button.green, button.green
+    +button(#66cc66)
+  .button.blue, button.blue
+    +button(#6666cc)

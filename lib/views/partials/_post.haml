@@ -16,7 +16,7 @@
 
   - if show_summary
     .summary
-      ~ markdown post.summary
+      /~ markdown post.summary
       - if show_read_more
         %p
           %a{:href => url_for(post)}= post.read_more.presence || "Read Complete Article"
