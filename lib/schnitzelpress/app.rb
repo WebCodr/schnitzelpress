@@ -1,9 +1,6 @@
 module Schnitzelpress
   class App < Sinatra::Base
-    STATIC_PATHS = ["/favicon.ico", "/img", "/js"]
-
-    set :views, ['./views/', File.expand_path('../../views/', __FILE__)]
-    set :public_folder, File.expand_path('../../public/', __FILE__)
+    set :views, Schnitzelpress.root.join('lib').join('views')
 
     use Rack::Session::Cookie
     set :session_secret, Random.rand.to_s

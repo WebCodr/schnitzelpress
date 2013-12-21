@@ -39,6 +39,14 @@ module Schnitzelpress
     rules << assets_repository.file(name.relative_path_from(assets_dir))
   end
 
+  Pathname.glob(assets_dir.join('images/**/*.{jpg,png,gif,ico}')).each do |name|
+    rules << assets_repository.file(name.relative_path_from(assets_dir))
+  end
+
+  Pathname.glob(assets_dir.join('fonts/*.woff')).each do |name|
+    rules << assets_repository.file(name.relative_path_from(assets_dir))
+  end
+
   assets_environment = Assets::Environment::Cache.build(rules)
 
   ASSETS_HANDLER = Assets::Handler.new(assets_environment, '/assets/')

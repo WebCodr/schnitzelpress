@@ -5,6 +5,7 @@
 @import grid
 @import solarized
 @import schnitzelstyle/complete
+@import compass/css3
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Droid+Sans+Mono|Roboto+Condensed)
 
 body, textarea
@@ -21,7 +22,7 @@ pre, code
 
 /* background image
 body, .container
-  background-image: url(/img/background.png)
+  background-image: url(/assets/images/background.png)
 
 .admin_only
   display: none
@@ -131,14 +132,7 @@ section.posts #welcome
     margin-top: 1em !important
     +clearfix
 
-// font-awesome
-@font-face
-  font-family: 'FontAwesome'
-  src: url("/font/fontawesome-webfont.eot")
-  src: url("/font/fontawesome-webfont.eot?#iefix") format("embedded-opentype"), url("/font/fontawesome-webfont.woff") format("woff"), url("/font/fontawesome-webfont.ttf") format("truetype"), url("/font/fontawesome-webfont.svgz#FontAwesomeRegular") format("svg"), url("/font/fontawesome-webfont.svg#FontAwesomeRegular") format("svg")
-  font-weight: normal
-  font-style: normal
-
++font-face('FontAwesome', font-files('fontawesome-webfont.woff'))
 
 .font-awesome
   font-family: FontAwesome
