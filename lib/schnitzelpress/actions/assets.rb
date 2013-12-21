@@ -1,14 +1,9 @@
-require 'packr'
-
-
 module Schnitzelpress
   class JavascriptPacker
     def self.pack_javascripts!(files)
-      plain = files.map do |filename|
-        File.read(File.expand_path("../lib/assets/js/#{filename}", settings.root))
+      files.map do |file|
+        File.read(Schnitzelpress.root.join('assets').join('javascript').join(file))
       end.join("\n")
-
-      Packr.pack(plain)
     end
   end
 

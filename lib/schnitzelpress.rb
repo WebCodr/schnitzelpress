@@ -37,6 +37,10 @@ module Schnitzelpress
   mattr_reader :mongo_uri
 
   class << self
+    def root
+      @root ||= Pathname.new(__FILE__).parent.parent.freeze
+    end
+
     def mongo_uri=(uri)
       Mongoid::Config.from_hash("uri" => uri)
       Schnitzelpress::Post.create_indexes
