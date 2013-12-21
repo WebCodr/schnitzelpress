@@ -20,3 +20,4 @@ tmp
 *.sublime*
 Gemfile.lock
 .DS_Store
+.idea/
