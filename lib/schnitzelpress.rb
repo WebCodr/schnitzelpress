@@ -1,11 +1,7 @@
-require 'schnitzelpress/version'
-
 require 'sinatra'
 require 'haml'
 require 'compass'
 require 'schnitzelstyle'
-require 'rack/contrib'
-require 'rack/cache'
 require 'mongoid'
 require 'chronic'
 require 'slodown_py'
@@ -41,7 +37,7 @@ module Schnitzelpress
 
   def self.omnomnom!
     init!
-    App.with_local_files
+    App
   end
 end
 

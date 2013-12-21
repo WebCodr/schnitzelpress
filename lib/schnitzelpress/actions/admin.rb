@@ -48,7 +48,7 @@ module Schnitzelpress
           haml :'admin/edit'
         end
 
-        put '/admin/edit/:id/?' do
+        post '/admin/edit/:id/?' do
           @post = Post.find(params[:id])
           @post.attributes = params[:post]
           if @post.save

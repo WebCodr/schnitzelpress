@@ -5,17 +5,10 @@ module Schnitzelpress
     set :views, ['./views/', File.expand_path('../../views/', __FILE__)]
     set :public_folder, File.expand_path('../../public/', __FILE__)
 
-    use Rack::Cache if Schnitzelpress.env.production?
-    use Rack::ShowExceptions
-    use Rack::StaticCache,
-      :urls => STATIC_PATHS,
-      :root => File.expand_path('../../public/', __FILE__)
-    use Rack::MethodOverride
     use Rack::Session::Cookie
 
     helpers Sinatra::ContentFor
     helpers Schnitzelpress::Helpers
-    include Rack::Utils
 
     get '/assets/*' do
       ASSETS_HANDLER.call(::Request::Rack.new(request.env)).to_rack_response
@@ -24,11 +17,6 @@ module Schnitzelpress
     include Schnitzelpress::Actions::Auth
     include Schnitzelpress::Actions::Admin
     include Schnitzelpress::Actions::Blog
-
-    configure do
-      disable :protection
-      set :logging, true
-    end
 
     before do
       # Reload configuration before every request. I know this isn't ideal,
@@ -45,13 +33,6 @@ module Schnitzelpress
 
     not_found do
       haml :"404"
-    end
-
-    def self.with_local_files
-      Rack::Cascade.new([
-        Rack::StaticCache.new(self, :urls => STATIC_PATHS, :root => './public'),
-        self
-      ])
     end
   end
 end

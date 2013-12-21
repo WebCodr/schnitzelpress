@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rack'
-gem 'rack-contrib'
-gem 'rack-cache'
 gem 'puma'
 gem 'sinatra'
 gem 'sinatra-contrib'
