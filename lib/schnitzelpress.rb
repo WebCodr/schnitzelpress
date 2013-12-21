@@ -16,8 +16,6 @@ require 'active_support/inflector'
 require 'active_support/core_ext/class'
 require 'active_support/concern'
 
-Mongoid.logger.level = 3
-
 module Schnitzelpress
   mattr_reader :mongo_uri
 
