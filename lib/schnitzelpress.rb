@@ -43,7 +43,6 @@ end
 
 require 'schnitzelpress/cache_control'
 require 'schnitzelpress/env'
-require 'schnitzelpress/static'
 require 'schnitzelpress/helpers'
 require 'schnitzelpress/config'
 require 'schnitzelpress/post'
