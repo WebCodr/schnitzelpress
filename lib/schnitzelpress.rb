@@ -13,31 +13,63 @@ require 'sinatra/content_for'
 Mongoid.logger.level = 3
 
 module Schnitzelpress
-  mattr_reader :mongo_uri
 
+  # Return root
+  #
+  # @return [Pathname]
+  #
+  # @api private
+  #
   def self.root
     @root ||= Pathname.new(__FILE__).parent.parent.freeze
   end
 
+  # Set MongoDB URI connection string and initialize Mongoid
+  #
+  # @param [String] uri
+  #
+  # @return [String]
+  #
+  # @api private
+  #
   def self.mongo_uri=(uri)
-    Mongoid::Config.from_hash("uri" => uri)
-    Schnitzelpress::Post.create_indexes
-    @@mongo_uri = uri
+    init_mongoid(uri)
+    @mongo_uri ||= uri
   end
 
-  def self.init!
-    # Mongoid.load!("./config/mongo.yml")
-    if mongo_uri = ENV['MONGOLAB_URI'] || ENV['MONGOHQ_URL'] || ENV['MONGO_URL']
-      self.mongo_uri = mongo_uri
-    else
-      raise "Please set MONGO_URL, MONGOHQ_URL or MONGOLAB_URI to your MongoDB connection string."
-    end
-    Schnitzelpress::Post.create_indexes
+  # Test if mongo_uri is set
+  #
+  # @return [Boolean]
+  #
+  # @api private
+  #
+  def self.mongo_uri?
+    defined(@mongo_uri)
   end
 
-  def self.omnomnom!
-    init!
-    App
+  # Return mongo_uri
+  #
+  # @return [String]
+  #
+  # @api private
+  #
+  def self.mongo_uri
+    raise 'Please set a MongoDB URI!' unless mongo_uri?
+
+   @mongo_uri
+  end
+
+private
+
+  # Initialize Mongoid
+  #
+  # @param [String] uri
+  #
+  # @api private
+  #
+  def self.init_mongoid(uri)
+    Mongoid::Config.from_hash('uri' => uri)
+    Schnitzelpress::Post.create_indexes
   end
 end
 
