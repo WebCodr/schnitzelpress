@@ -165,5 +165,9 @@ module Schnitzelpress
     def disqus?
       disqus && published?
     end
+
+    def self.total
+      self.latest.count
+    end
   end
 end

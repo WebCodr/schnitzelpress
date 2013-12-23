@@ -23,11 +23,6 @@ module Schnitzelpress
       Config.instance.reload
     end
 
-    def fresh_when(options)
-      last_modified options[:last_modified]
-      etag options[:etag]
-    end
-
     not_found do
       haml :"404"
     end

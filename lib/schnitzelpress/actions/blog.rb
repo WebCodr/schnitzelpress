@@ -5,42 +5,17 @@ module Schnitzelpress
 
       included do
         get '/' do
-          @show_description = true
-          if @post = Post.published.pages.where(:slugs => 'home').first
-            extra_posts = Post.latest.limit(5)
-            @extra_posts = ['From the Blog:', extra_posts] if extra_posts.any?
-            render_post
-          else
-            render_blog
-          end
-        end
-
-        get '/blog/?' do
-          @show_description = true
           render_blog
         end
 
-        def render_blog
-          total_count   = Post.latest.count
-          skipped_count = params[:page].to_i * 10
-          @posts = Post.latest.skip(skipped_count).limit(10)
-
-          displayed_count = @posts.count(true)
-          @show_previous_posts_button = total_count > skipped_count + displayed_count
-
-          render_posts
-        end
-
-        # /posts.atom is now deprecated.
-        get '/posts.atom' do
-          redirect '/blog.atom', 301
+        get '/blog/?' do
+          render_blog
         end
 
         get '/blog.atom' do
-          cache_control :public, :must_revalidate, :s_maxage => 2, :max_age => 3.minutes.to_i
-
-          @posts = Post.latest.limit(10)
           content_type 'application/atom+xml; charset=utf-8'
+          @posts = Post.latest.limit(10)
+
           haml :atom, :format => :xhtml, :layout => false
         end
 
@@ -80,33 +55,42 @@ module Schnitzelpress
           render_post
         end
 
-        def render_post(enforce_canonical_url = true)
-          if @post
-            # enforce canonical URL
-            if enforce_canonical_url && request.path != url_for(@post)
-              redirect url_for(@post)
-            else
-              fresh_when :last_modified => @post.updated_at,
-                :etag => CacheControl.etag(@post.updated_at)
+        def skipped
+          params[:page].to_i * 10
+        end
 
-              @show_description = @post.home_page?
+        def render_blog
+          @posts = Post.latest.skip(skipped).limit(10)
 
-              cache_control :public, :must_revalidate, :s_maxage => 2, :max_age => 60
-              haml :post
-            end
-          else
-            halt 404
-          end
+          displayed_count = @posts.count(true)
+          @show_previous_posts_button = Post.total > skipped + displayed_count
+          @show_description = true
+
+          render_posts
         end
 
         def render_posts
-          if freshest_post = @posts.where(:updated_at.ne => nil).desc(:updated_at).first
-            fresh_when :last_modified => freshest_post.updated_at,
-              :etag => CacheControl.etag(freshest_post.updated_at)
+          haml :index
+        end
+
+        def requested_canonical_url?(post)
+          request.path == url_for(post)
+        end
+
+        def post_exists?(post)
+          !!post
+        end
+
+        def render_post
+          unless post_exists?(@post)
+            return halt 404
           end
 
-          cache_control :public, :must_revalidate, :s_maxage => 2, :max_age => 60
-          haml :index
+          unless requested_canonical_url?(@post)
+            return redirect url_for(@post)
+          end
+
+          haml :post
         end
       end
     end
