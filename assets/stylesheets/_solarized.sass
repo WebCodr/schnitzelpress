@@ -37,8 +37,7 @@ $pre-border: darken($base02, 5) !default
 $pre-color: $base1 !default
 
 .highlight
-  overflow: scroll
-  overflow-y: hidden
+  overflow: hidden !important
   display: block
   padding: .8em
   overflow-x: auto
@@ -60,6 +59,8 @@ $pre-color: $base1 !default
     white-space: pre
     word-break: normal
     word-wrap: normal
+    overflow: auto !important
+    overflow-y: hidden !important
   .c
     color: $base01 !important
     font-style: italic !important
