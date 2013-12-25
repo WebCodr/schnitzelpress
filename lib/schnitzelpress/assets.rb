@@ -17,6 +17,18 @@ module Schnitzelpress
     config.http_fonts_dir = "fonts"
   end
 
+  # Ugly hack for Windows hosts
+  #
+  # On Windows hosts can SASS cache cannot be in the shared directory
+  # SASS throws an error that cache files are busy due to shared folder behaviour of Virtual Box
+  # and SASS cannot compile the stylesheets
+
+  if ENV['VAGRANT_WINDOWS_HOST']
+    options = Sass::Engine::DEFAULT_OPTIONS.dup
+    options[:cache_location] = '/tmp/.sass-sache'
+    Sass::Engine::DEFAULT_OPTIONS = options.freeze
+  end
+
   Sass.load_paths.concat(Compass::Configuration::Data.new('foo').sass_load_paths)
   Sass.load_paths << assets_dir.join('stylesheets')
 

@@ -1,0 +1,1 @@
+MONGOLAB_URI='mongodb://localhost:27017/schnitzelpress_dev' SCHNITZELPRESS_OWNER='madcat.me@gmail.com' VAGRANT_WINDOWS_HOST=1 bundle exec puma
