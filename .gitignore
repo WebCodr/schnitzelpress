@@ -20,3 +20,4 @@ tmp
 *.sublime*
 .DS_Store
 .idea/
+.vagrant/
