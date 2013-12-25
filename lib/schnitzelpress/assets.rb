@@ -17,9 +17,9 @@ module Schnitzelpress
     config.http_fonts_dir = "fonts"
   end
 
-  # Ugly hack for Windows hosts
+  # Ugly hack for Vagrant on Windows hosts
   #
-  # On Windows hosts can SASS cache cannot be in the shared directory
+  # On Windows hosts the SASS cache cannot be in the shared directory of Vagrant
   # SASS throws an error that cache files are busy due to shared folder behaviour of Virtual Box
   # and SASS cannot compile the stylesheets
 
