@@ -2,7 +2,7 @@ module Schnitzelpress
   class Post
     include Mongoid::Document
     include Mongoid::Timestamps
-    store_in :posts
+    store_in :collection => 'posts'
 
     # basic data
     field :title, :type => String
@@ -25,9 +25,9 @@ module Schnitzelpress
     field :body_html, :type => String
 
     # indices
-    index :slugs
-    index :published_at
-    index :status
+    index :slugs => 1
+    index :published_at => -1
+    index :status => 1
 
     # validations
     validates_presence_of :status, :slug

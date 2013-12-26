@@ -24,53 +24,16 @@ module Schnitzelpress
     @root ||= Pathname.new(__FILE__).parent.parent.freeze
   end
 
-  # Set MongoDB URI connection string and initialize Mongoid
+  # Return path to Mongoid config file
   #
-  # @param [String] uri
-  #
-  # @return [String]
+  # @return [Pathname]
   #
   # @api private
   #
-  def self.mongo_uri=(uri)
-    init_mongoid(uri)
-    @mongo_uri ||= uri
+  def self.mongoid_config
+    @mongoid_config ||= self.root.join('config').join('mongoid.yml')
   end
 
-  # Test if mongo_uri is set
-  #
-  # @return [Boolean]
-  #
-  # @api private
-  #
-  def self.mongo_uri?
-    defined(@mongo_uri)
-  end
-
-  # Return mongo_uri
-  #
-  # @return [String]
-  #
-  # @api private
-  #
-  def self.mongo_uri
-    raise 'Please set a MongoDB URI!' unless mongo_uri?
-
-   @mongo_uri
-  end
-
-private
-
-  # Initialize Mongoid
-  #
-  # @param [String] uri
-  #
-  # @api private
-  #
-  def self.init_mongoid(uri)
-    Mongoid::Config.from_hash('uri' => uri)
-    Schnitzelpress::Post.create_indexes
-  end
 end
 
 require 'schnitzelpress/cache_control'
