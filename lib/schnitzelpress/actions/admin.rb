@@ -12,11 +12,11 @@ module Schnitzelpress
           @posts  = Post.published.posts.desc(:published_at)
           @pages  = Post.published.pages
           @drafts = Post.drafts
-          haml :'admin/admin'
+          slim :'admin/admin'
         end
 
         get '/admin/config/?' do
-          haml :'admin/config'
+          slim :'admin/config'
         end
 
         post '/admin/config' do
@@ -25,13 +25,13 @@ module Schnitzelpress
             CacheControl.bust!
             redirect '/admin'
           else
-            haml :'admin/config'
+            slim :'admin/config'
           end
         end
 
         get '/admin/new/?' do
           @post = Post.new
-          haml :'admin/new'
+          slim :'admin/new'
         end
 
         post '/admin/new/?' do
@@ -39,13 +39,13 @@ module Schnitzelpress
           if @post.save
             redirect url_for(@post)
           else
-            haml :'admin/new'
+            slim :'admin/new'
           end
         end
 
         get '/admin/edit/:id/?' do
           @post = Post.find(params[:id])
-          haml :'admin/edit'
+          slim :'admin/edit'
         end
 
         post '/admin/edit/:id/?' do
@@ -54,7 +54,7 @@ module Schnitzelpress
           if @post.save
             redirect url_for(@post)
           else
-            haml :'admin/edit'
+            slim :'admin/edit'
           end
         end
 

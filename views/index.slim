@@ -1,0 +1,10 @@
+section.posts
+  - if @posts.any?
+    - @posts.each do |post|
+      == partial post
+  - else
+    #welcome
+      h1= "Welcome"
+  footer
+    - if @show_previous_posts_button
+      a.button href=("/?page=#{params[:page].to_i + 1}")  View Older Posts

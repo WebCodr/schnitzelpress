@@ -18,7 +18,7 @@ module Schnitzelpress
         else thing.class.to_s.demodulize.underscore
       end
 
-      haml :"partials/_#{name}", :locals => { name.to_sym => thing }.merge(locals)
+      slim :"partials/_#{name}", :locals => { name.to_sym => thing }.merge(locals)
     end
 
     def config
@@ -231,7 +231,7 @@ module Schnitzelpress
       options[:href] = target.respond_to?(:to_url) ? target.to_url : target
       options[:data] ||= {}
       [:method, :confirm].each { |a| options[:data][a] = options.delete(a) }
-      haml "%a#{options} #{title}"
+      slim "a(href=\"#{options[:href]}\" data-method=\"#{options[:data][:method]}\" data-confirm=\"#{options[:data][:confirm]}\") #{title}"
     end
 
     def link_to_delete_post(title, post)

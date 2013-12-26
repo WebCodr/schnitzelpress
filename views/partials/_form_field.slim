@@ -1,0 +1,31 @@
+.input class=[options[:type], options[:class]]
+  label for=options[:id] #{options[:label]}
+  - if options[:type].to_sym == :textarea
+    textarea id=options[:id] name=options[:name] rows=(options[:rows] || 20) placeholder=options[:placeholder] == options[:value]
+
+  - elsif options[:type].to_sym == :radio
+    - options[:options].each do |o|
+      .option
+        input id=options[:id] name=options[:name] placeholder=options[:placeholder] type="radio" value=o checked=(options[:value] == o) == o
+
+  - elsif options[:type].to_sym == :dropdown
+    select id=options[:id] name=options[:name]
+      - options[:options].each do |val, text|
+        option value=val selected=(options[:value] == val) == text
+
+  - elsif options[:type].to_sym == :datetime
+    input id=options[:id] name=options[:name] placeholder=options[:placeholder] value=options[:value].to_formatted_s(:db)
+
+  - elsif options[:type].to_sym == :boolean
+    input id=options[:id] name=options[:name] type="hidden" value="0"
+    input id=options[:id] name=options[:name] type="checkbox" value="1" checked=options[:value]
+    span.value Enable
+
+  - else
+    input id=options[:id] name=options[:name] placeholder=options[:placeholder] value=options[:value]
+
+  - if options[:errors]
+    .error = options[:errors].join(", ")
+
+  - if options[:hint]
+    .hint = options[:hint]

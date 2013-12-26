@@ -1,0 +1,15 @@
+- @page_title = "Login"
+
+section
+  p
+    | Please use one of the following services to log in:
+
+  p
+    a.button#browser_id> href='/auth/browser_id'  Log in with Mozilla Persona
+    - if Schnitzelpress.env.development?
+      a.green.button href='/auth/developer'  Developer Login
+
+  form method='post' action='/auth/browser_id/callback' noValidate='noValidate' 
+    input type='hidden' name='assertion' 
+
+script  type='text/javascript' src=('//browserid.org/include.js' ) 

@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'haml'
+require 'slim'
 require 'compass'
 require 'schnitzelstyle'
 require 'mongoid'
@@ -31,7 +31,17 @@ module Schnitzelpress
   # @api private
   #
   def self.mongoid_config
-    @mongoid_config ||= self.root.join('config').join('mongoid.yml')
+    @mongoid_config ||= root.join('config').join('mongoid.yml')
+  end
+
+  # Return template path
+  #
+  # @return [Pathname]
+  #
+  # @api private
+  #
+  def templates
+    @template ||= root.join('templates')
   end
 
 end

@@ -24,7 +24,7 @@ module Schnitzelpress
         end
 
         get '/login' do
-          haml :'login'
+          slim :login
         end
 
         get '/logout' do

@@ -16,7 +16,7 @@ module Schnitzelpress
           content_type 'application/atom+xml; charset=utf-8'
           @posts = Post.latest.limit(10)
 
-          haml :atom, :format => :xhtml, :layout => false
+          slim :atom, :format => :xhtml, :layout => false
         end
 
         get '/feed/?' do
@@ -70,7 +70,7 @@ module Schnitzelpress
         end
 
         def render_posts
-          haml :index
+          slim :index
         end
 
         def requested_canonical_url?(post)
@@ -90,7 +90,7 @@ module Schnitzelpress
             return redirect url_for(@post)
           end
 
-          haml :post
+          slim :post
         end
       end
     end
