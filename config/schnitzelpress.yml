@@ -1,0 +1,15 @@
+:database:
+  :development:
+    :uri: postgres://schnitzel_dev:schnitzel@localhost/schnitzelpress_dev
+
+  :test:
+    :uri: postgres://schnitzel_test:schnitzel@localhost/schnitzelpress_test
+
+  :circle:
+    :uri: postgres://ubuntu@localhost/circle_test
+
+  :travis:
+    :uri: postgres://postgres@localhost/schnitzel_test
+
+  :production:
+    :uri: <%= ENV['DATABASE_URL'] %>

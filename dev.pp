@@ -54,11 +54,20 @@ service { 'mongodb':
   require => Package['mongodb'],
 }
 
+package { 'libpq-dev':
+  ensure => present,
+}
+
 class { 'postgresql::server': }
 
 postgresql::server::db { 'schnitzelpress_dev':
-  user     => 'schnitzel',
-  password => postgresql_password('schnitzel', 'schnitzel'),
+  user     => 'schnitzel_dev',
+  password => postgresql_password('schnitzel_dev', 'schnitzel'),
+}
+
+postgresql::server::db { 'schnitzelpress_test':
+  user     => 'schnitzel_test',
+  password => postgresql_password('schnitzel_test', 'schnitzel'),
 }
 
 # --- Ruby ---------------------------------------------------------------------
