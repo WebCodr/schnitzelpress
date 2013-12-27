@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'yaml'
 require 'slim'
 require 'compass'
 require 'schnitzelstyle'
@@ -51,7 +52,7 @@ module Schnitzelpress
   #
   # @api private
   #
-  def environment
+  def self.environment
     @environment ||= Schnitzelpress::Environment.new(ENV)
   end
 
@@ -60,11 +61,15 @@ end
 require 'schnitzelpress/cache_control'
 require 'schnitzelpress/env'
 require 'schnitzelpress/environment'
+require 'schnitzelpress/database'
 require 'schnitzelpress/helpers'
 require 'schnitzelpress/config'
+require 'schnitzelpress/model/post'
 require 'schnitzelpress/post'
 require 'schnitzelpress/actions/blog'
 require 'schnitzelpress/actions/auth'
 require 'schnitzelpress/actions/admin'
 require 'schnitzelpress/assets'
 require 'schnitzelpress/app'
+
+Schnitzelpress::Database.setup(Schnitzelpress.environment.current)
