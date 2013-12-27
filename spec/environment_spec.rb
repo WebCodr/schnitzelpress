@@ -65,7 +65,7 @@ describe Schnitzelpress::Environment do
     let(:environment) { {'RACK_ENV' => '<sdfsdfds>'} }
 
     it 'throws exception on unknown environment' do
-      expect {subject}.to raise_error(RuntimeError)
+      expect { subject }.to raise_error(RuntimeError)
     end
   end
 end
