@@ -17,6 +17,7 @@ gem 'schnitzelstyle'
 gem 'slim'
 gem 'slodown.py'
 gem 'chronic'
+gem 'rake'
 
 group :development, :test do
   gem 'rspec'
