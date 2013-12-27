@@ -54,6 +54,10 @@ service { 'mongodb':
   require => Package['mongodb'],
 }
 
+package { 'libpq-dev':
+  ensure => present,
+}
+
 class { 'postgresql::server': }
 
 postgresql::server::db { 'schnitzelpress_dev':
