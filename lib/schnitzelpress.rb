@@ -3,6 +3,7 @@ require 'slim'
 require 'compass'
 require 'schnitzelstyle'
 require 'mongoid'
+require 'data_mapper'
 require 'chronic'
 require 'slodown_py'
 require 'assets'
@@ -44,10 +45,21 @@ module Schnitzelpress
     @template ||= root.join('templates')
   end
 
+  # Return environment
+  #
+  # @return [Schnitzelpress::Environment]
+  #
+  # @api private
+  #
+  def environment
+    @environment ||= Schnitzelpress::Environment.new(ENV)
+  end
+
 end
 
 require 'schnitzelpress/cache_control'
 require 'schnitzelpress/env'
+require 'schnitzelpress/environment'
 require 'schnitzelpress/helpers'
 require 'schnitzelpress/config'
 require 'schnitzelpress/post'
