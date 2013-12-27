@@ -54,6 +54,13 @@ service { 'mongodb':
   require => Package['mongodb'],
 }
 
+class { 'postgresql::server': }
+
+postgresql::server::db { 'schnitzelpress_dev':
+  user     => 'schnitzel',
+  password => postgresql_password('schnitzel', 'schnitzel'),
+}
+
 # --- Ruby ---------------------------------------------------------------------
 
 exec { 'install_rvm':
