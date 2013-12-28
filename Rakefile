@@ -1,6 +1,6 @@
 $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
 
-ENV['RACK_ENV'] = 'development'
+ENV['RACK_ENV'] = 'production'
 
 require 'bundler/setup'
 require 'schnitzelpress'
