@@ -21,3 +21,5 @@ tmp
 .DS_Store
 .idea/
 .vagrant/
+.tmp/
+.librarian/
