@@ -1,6 +1,8 @@
 services: mongodb
 language: ruby
-before_install: gem install bundler -v '1.3.5'
+before_install:
+  - gem install bundler -v '1.5.1'
+  - bundle -v
 before_script:
   - psql -c 'create database schnitzel_test;' -U postgres
 rvm:
