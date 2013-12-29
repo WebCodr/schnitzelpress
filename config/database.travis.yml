@@ -1,5 +1,0 @@
-test:
-  adapter: postgres
-  host: localhost
-  username: postgres
-  database: schnitzelpress_test

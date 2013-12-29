@@ -6,8 +6,8 @@ module Schnitzelpress
     # @api private
     #
     def self.setup(environment)
-      config = self.config.fetch(environment.to_s)
-      DataMapper.setup(:default, config)
+      uri = self.config.fetch(environment.to_s).fetch('uri')
+      DataMapper.setup(:default, uri)
       DataMapper.finalize
       DataMapper.auto_upgrade!
     end
@@ -31,7 +31,7 @@ module Schnitzelpress
     # @api private
     #
     def self.config_file
-      @config_file ||= Schnitzelpress.root.join('config').join('database.yml')
+      @config_file ||= Schnitzelpress.root.join('config').join('schnitzelpress.yml')
     end
 
   end

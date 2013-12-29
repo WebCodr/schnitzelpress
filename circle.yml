@@ -1,6 +1,6 @@
 database:
   post:
-    - cp -f config/database.circle.yml config/database.yml
+    - cp -f config/schnitzelpress.circle.yml config/schnitzelpress.yml
 deployment:
   staging:
     branch: master

@@ -1,0 +1,3 @@
+test:
+  uri: postgres://postgres@localhost/schnitzel_test
+
