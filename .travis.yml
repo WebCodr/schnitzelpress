@@ -4,8 +4,8 @@ before_install:
   - gem install bundler -v '1.5.1'
   - bundle -v
 before_script:
+  - psql -c 'create database schnitzelpress_test;' -U postgres
   - cp -f config/database.travis.yml config/database.yml
-  - psql -c 'create database schnitzel_test;' -U postgres
 rvm:
   - 2.1.0
 script: bundle exec rspec spec
