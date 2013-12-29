@@ -6,33 +6,6 @@ describe Schnitzelpress::Environment do
 
   let(:object) { described_class.new(environment) }
 
-  describe '#current Circle CI' do
-
-    let(:environment) { {'CI' => true, 'CIRCLECI' => true} }
-
-    specify do
-      should eql(:circle)
-    end
-  end
-
-  describe '#current Circle CI' do
-
-    let(:environment) { {'CI' => true, 'TRAVIS' => true} }
-
-    specify do
-      should eql(:travis)
-    end
-  end
-
-  describe '#current drone.io' do
-
-    let(:environment) { {'CI' => true, 'DRONE' => true} }
-
-    specify do
-      should eql(:drone)
-    end
-  end
-
   describe '#current rack env test' do
 
     let(:environment) { {'RACK_ENV' => 'test'} }

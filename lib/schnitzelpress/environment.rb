@@ -9,10 +9,7 @@ module Schnitzelpress
     # @api private
     #
     def current
-      return :circle if circle?
-      return :travis if travis?
-      return :drone  if drone?
-      return :test   if test?
+      return :test if test?
       return :development if development?
       return :production if production?
 
@@ -20,46 +17,6 @@ module Schnitzelpress
     end
 
   private
-
-    # Test for CI environment
-    #
-    # @return [Boolean]
-    #
-    # @api private
-    #
-    def ci?
-      !!environment['CI']
-    end
-
-    # Test for Circle CI environment
-    #
-    # @return [Boolean]
-    #
-    # @api private
-    #
-    def circle?
-      ci? && !!environment['CIRCLECI']
-    end
-
-    # Test for Travis CI environment
-    #
-    # @return [Boolean]
-    #
-    # @api private
-    #
-    def travis?
-      ci? && !!environment['TRAVIS']
-    end
-
-    # Test for Drone.io CI environment
-    #
-    # @return [Boolean]
-    #
-    # @api private
-    #
-    def drone?
-      ci? && !!environment['DRONE']
-    end
 
     # Test for testing environment
     #

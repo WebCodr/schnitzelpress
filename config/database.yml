@@ -1,0 +1,13 @@
+development:
+  adapter: postgres
+  host: localhost
+  username: schnitzel_dev
+  password: schnitzel
+  database: schnitzelpress_dev
+
+test:
+  adapter: postgres
+  host: localhost
+  username: schnitzel_test
+  password: schnitzel
+  database: schnitzelpress_test
