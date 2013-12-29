@@ -9,7 +9,7 @@ module Schnitzelpress
       property :status,        Enum[:draft, :published], :default => :draft, :key => true
       property :comments,      Boolean, :default => true
       property :slug,          Slug, :key => true
-      property :title,         String, :key => true
+      property :title,         String, :length => 150, :key => true
       property :body,          Text
       property :rendered_body, Text
 
