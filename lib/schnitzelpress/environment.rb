@@ -1,6 +1,6 @@
 module Schnitzelpress
   class Environment
-    include Concord.new(:environment)
+    include Concord.new(:env_vars)
 
     # Return current environment
     #
@@ -8,15 +8,13 @@ module Schnitzelpress
     #
     # @api private
     #
-    def current
+    def state
       return :test if test?
       return :development if development?
       return :production if production?
 
       raise 'Could not determine current environment!'
     end
-
-  private
 
     # Test for testing environment
     #
@@ -25,7 +23,7 @@ module Schnitzelpress
     # @api private
     #
     def test?
-      environment['RACK_ENV'] == 'test'
+      env_vars['RACK_ENV'] == 'test'
     end
 
     # Test for development environment
@@ -35,7 +33,7 @@ module Schnitzelpress
     # @api private
     #
     def development?
-      environment['RACK_ENV'] == 'development'
+      env_vars['RACK_ENV'] == 'development'
     end
 
     # Test for production environment
@@ -45,7 +43,7 @@ module Schnitzelpress
     # @api private
     #
     def production?
-      environment['RACK_ENV'] == 'production'
+      env_vars['RACK_ENV'] == 'production'
     end
 
   end

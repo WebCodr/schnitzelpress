@@ -53,14 +53,13 @@ module Schnitzelpress
   #
   # @api private
   #
-  def self.environment
-    @environment ||= Schnitzelpress::Environment.new(ENV)
+  def self.env
+    @env ||= Schnitzelpress::Environment.new(ENV)
   end
 
 end
 
 require 'schnitzelpress/cache_control'
-require 'schnitzelpress/env'
 require 'schnitzelpress/environment'
 require 'schnitzelpress/database'
 require 'schnitzelpress/helpers'
@@ -73,4 +72,4 @@ require 'schnitzelpress/actions/admin'
 require 'schnitzelpress/assets'
 require 'schnitzelpress/app'
 
-Schnitzelpress::Database.setup(Schnitzelpress.environment.current)
+Schnitzelpress::Database.setup(Schnitzelpress.env.state)

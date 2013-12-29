@@ -40,7 +40,7 @@ module Schnitzelpress
     end
 
     def production?
-      settings.environment.to_sym == :production
+      Schnitzelpress.env.production?
     end
 
     def user_logged_in?
