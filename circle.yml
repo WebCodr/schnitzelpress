@@ -1,5 +1,6 @@
 database:
-  post: cp -f config/database.circle.yml config/database.yml
+  post:
+    - cp -f config/database.circle.yml config/database.yml
 deployment:
   staging:
     branch: master
