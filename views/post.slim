@@ -11,9 +11,9 @@
         li
           a href=post.to_url = h post.title
 
-- if show_disqus? && @post.disqus?
+- if show_disqus? && @post.comments?
   section.disqus
-    == partial 'disqus', :disqus_identifier => @post.disqus_identifier
+    == partial 'disqus', :disqus_identifier => @post.post_identifier
 
 - content_for :actions do
   a> href="/admin/edit/#{@post.id}" == icon('edit') + ' Edit'
