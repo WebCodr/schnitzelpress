@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'yaml'
+require 'erb'
 require 'slim'
 require 'compass'
 require 'schnitzelstyle'

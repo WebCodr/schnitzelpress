@@ -21,7 +21,17 @@ module Schnitzelpress
     # @api private
     #
     def self.config
-      @config ||= YAML.load_file(Schnitzelpress.root.join('config').join('database.yml'))
+      @config ||= YAML.load(ERB.new(File.new(config_file).read).result)
+    end
+
+    # Return path to database config file
+    #
+    # @return [Pathname]
+    #
+    # @api private
+    #
+    def self.config_file
+      @config_file ||= Schnitzelpress.root.join('config').join('database.yml')
     end
 
   end
