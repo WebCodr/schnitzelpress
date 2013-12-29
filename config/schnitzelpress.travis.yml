@@ -1,3 +1,3 @@
 test:
-  uri: postgres://postgres@localhost/schnitzel_test
+  uri: postgres://postgres@localhost/schnitzelpress_test
 
