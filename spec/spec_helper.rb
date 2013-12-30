@@ -22,7 +22,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner[:data_mapper].start
-    Schnitzelpress::Config.forget_instance
+    Schnitzelpress::Model::Config.forget_instance
   end
 
   config.after(:each) do

@@ -72,7 +72,7 @@ end
 require 'schnitzelpress/environment'
 require 'schnitzelpress/database'
 require 'schnitzelpress/helpers'
-require 'schnitzelpress/config'
+require 'schnitzelpress/model/config'
 require 'schnitzelpress/model/post'
 require 'schnitzelpress/actions/blog'
 require 'schnitzelpress/actions/auth'

@@ -22,7 +22,7 @@ module Schnitzelpress
     end
 
     def config
-      Schnitzelpress::Config.instance
+      Schnitzelpress::Model::Config.instance
     end
 
     def set_page_title(title)

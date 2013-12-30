@@ -17,7 +17,7 @@ describe Schnitzelpress::App do
     subject { last_response }
 
     it { should be_ok }
-    its(:body) { should have_tag 'title', :text => Schnitzelpress::Config.instance.blog_title }
+    its(:body) { should have_tag 'title', :text => Schnitzelpress::Model::Config.instance.blog_title }
     its(:body) { should have_tag 'section.posts > article.post', :count => 5 }
     its(:body) { should_not have_tag 'section.posts > article.post.draft' }
   end

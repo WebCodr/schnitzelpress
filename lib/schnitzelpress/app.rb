@@ -22,7 +22,7 @@ module Schnitzelpress
       # but right now it's the easiest way to get the configuration in synch
       # across multiple instances of the app.
       #
-      Config.instance.reload
+      Model::Config.instance.reload
     end
 
     not_found do
