@@ -244,7 +244,7 @@ module Schnitzelpress
       def validate_slug
         conflicting_posts = self.class.all(:slug => self.slug)
 
-        if conflicting_posts.length > 0
+        if conflicting_posts.any? && conflicting_posts.first.id != self.id
           return [false, "Slug '#{self.slug}' already exists!"]
         end
 
