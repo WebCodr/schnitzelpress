@@ -57,6 +57,16 @@ module Schnitzelpress
     @env ||= Schnitzelpress::Environment.new(ENV)
   end
 
+  # Return assets
+  #
+  # @return [Schnitzelpress::Assets]
+  #
+  # @api private
+  #
+  def self.assets
+    @assets ||= Schnitzelpress::Assets.new
+  end
+
 end
 
 require 'schnitzelpress/environment'

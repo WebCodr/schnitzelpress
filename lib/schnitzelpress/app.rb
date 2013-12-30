@@ -10,7 +10,7 @@ module Schnitzelpress
     Mongoid.load!(Schnitzelpress.mongoid_config, ENV['RACK_ENV'])
 
     get '/assets/*' do
-      ASSETS_HANDLER.call(::Request::Rack.new(request.env)).to_rack_response
+      Schnitzelpress.assets.assets_handler.call(::Request::Rack.new(request.env)).to_rack_response
     end
 
     include Schnitzelpress::Actions::Auth
