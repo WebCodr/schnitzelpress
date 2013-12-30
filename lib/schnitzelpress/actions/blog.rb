@@ -30,7 +30,7 @@ module Schnitzelpress
           @posts = Schnitzelpress::Model::Post.latest.limit(10).skip(skipped)
 
           displayed_count = @posts.length
-          @show_previous_posts_button = Schnitzelpress::Model::Post.count > skipped + displayed_count
+          @show_previous_posts_button = Schnitzelpress::Model::Post.posts.count > skipped + displayed_count
           @show_description = true
 
           render_posts
