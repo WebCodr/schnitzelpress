@@ -15,6 +15,7 @@ module Schnitzelpress
       property :transformed_body, Text, :lazy => false
 
       before :valid?, :create_slug
+      validates_presence_of :slug
       validates_with_method :validate_slug
 
       before :save do
@@ -222,6 +223,18 @@ module Schnitzelpress
         transformed_body
       end
 
+      # Set publishing date and parse it with Chronic if it's a string
+      #
+      # @param [String] value
+      #
+      # @api private
+      #
+      def published_at=(value)
+        value = Chronic.parse(value) if value.is_a?(String)
+
+        super(value)
+      end
+
     private
 
       # Validate slug
@@ -243,7 +256,7 @@ module Schnitzelpress
       # @api private
       #
       def create_slug
-        unless self.slug
+        if !self.slug || self.slug.empty?
           self.slug = title.parameterize
         end
       end
