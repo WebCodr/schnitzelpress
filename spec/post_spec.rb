@@ -1,17 +1,17 @@
 require 'spec_helper'
 
-describe Schnitzelpress::Post do
+describe Schnitzelpress::Model::Post do
+  include FactoryHelper
+
   subject do
-    Factory.build(:post)
+    create_post
   end
 
-  context 'slugs' do
+  context 'slug' do
     before do
-      subject.slugs = ['some-slug', 'another-slug']
       subject.slug = 'a-new-slug'
     end
 
-    its(:slugs) { should == ['some-slug', 'another-slug', 'a-new-slug'] }
     its(:slug) { should == 'a-new-slug'}
   end
 
@@ -28,60 +28,13 @@ describe Schnitzelpress::Post do
             to('team-schnitzel-is-awesome')
         end
       end
-
-      context "when no title is available" do
-        before do
-          subject.title = nil
-          subject.body = "Team Schnitzel is AWESOME! Lorem ipsum and so on."
-        end
-
-        it "should set its slug to a sluggified version of the truncated body" do
-          expect { subject.save }.to change(subject, :slug).
-            from(nil).
-            to('team-schnitzel-is-awesome-lorem')
-        end
-      end
-    end
-
-    context "when another post on the same day is already using the same slug" do
-      before do
-        @other_post = Factory(:published_post, :slugs => ["amazing-slug"])
-        subject.published_at = @other_post.published_at
-        subject.slug = "amazing-slug"
-      end
-
-      it { should_not be_valid }
-    end
-
-    context "when another page is using the same slug" do
-      subject { Factory.build(:draft_page) }
-
-      before do
-        @other_page = Factory(:published_page, :slugs => ["amazing-slug"])
-        subject.slug = "amazing-slug"
-      end
-
-      it { should_not be_valid }
-    end
-
-    it "should store blank attributes as nil" do
-      subject.link = ""
-      expect { subject.save }.to change(subject, :link).from("").to(nil)
-    end
-
-    it "should remove leading and trailing spaces from string attributes" do
-      subject.link = " moo "
-      subject.link.should == " moo "
-      subject.save
-      subject.link.should == "moo"
     end
   end
 
   describe '.latest' do
     it 'should return the latest published posts' do
-      2.times { Factory :draft_post }
-      5.times { Factory :published_post }
-      Schnitzelpress::Post.latest.size.should == 5
+      5.times { create_post }
+      Schnitzelpress::Model::Post.latest.length == 5
     end
   end
 
@@ -94,8 +47,8 @@ describe Schnitzelpress::Post do
 
   context 'to_url' do
     it 'should produce double-digit months and days' do
-      @post = Factory.build(:post, :published_at => '2012-1-1 12:00:00', :slug => 'test')
-      @post.to_url.should == '/2012/01/01/test/'
+      post = create_post(:published_at => '2012-1-1 12:00:00', :slug => 'test')
+      post.to_url.should == '/2012/01/01/test/'
     end
   end
 end
