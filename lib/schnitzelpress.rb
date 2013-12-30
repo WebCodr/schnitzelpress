@@ -59,7 +59,6 @@ module Schnitzelpress
 
 end
 
-require 'schnitzelpress/cache_control'
 require 'schnitzelpress/environment'
 require 'schnitzelpress/database'
 require 'schnitzelpress/helpers'

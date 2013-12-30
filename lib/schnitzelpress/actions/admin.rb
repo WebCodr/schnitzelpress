@@ -22,7 +22,6 @@ module Schnitzelpress
         post '/admin/config' do
           config.attributes = params[:config]
           if config.save
-            CacheControl.bust!
             redirect '/admin'
           else
             slim :'admin/config'
