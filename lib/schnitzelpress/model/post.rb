@@ -5,12 +5,12 @@ module Schnitzelpress
 
       property :id,               Serial
       timestamps :at
-      property :published_at,     DateTime, :key => true
-      property :type,             Enum[:page, :post], :default => :post, :key => true
-      property :status,           Enum[:draft, :published], :default => :draft, :key => true
+      property :published_at,     DateTime
+      property :type,             Enum[:page, :post], :default => :post
+      property :status,           Enum[:draft, :published], :default => :draft
       property :comments,         Boolean, :default => true
-      property :slug,             Slug, :key => true
-      property :title,            String, :length => 150, :key => true
+      property :slug,             Slug
+      property :title,            String, :length => 150
       property :body,             Text, :lazy => false
       property :transformed_body, Text, :lazy => false
 
