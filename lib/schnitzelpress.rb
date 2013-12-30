@@ -1,7 +1,6 @@
 require 'sinatra'
 require 'active_support'
 require "active_support/inflector"
-require "active_support/time_with_zone"
 require 'yaml'
 require 'erb'
 require 'slim'
