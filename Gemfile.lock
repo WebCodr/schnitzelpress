@@ -18,7 +18,7 @@ GEM
       equalizer (~> 0.0.7)
     atomic (1.1.14)
     awesome_print (1.2.0)
-    backports (3.3.5)
+    backports (3.4.0)
     bcrypt-ruby (3.1.2)
     builder (3.0.4)
     chronic (0.10.2)
@@ -139,7 +139,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rake (10.1.0)
+    rake (10.1.1)
     request (0.0.5)
       abstract_type (~> 0.0.6)
       adamantium (~> 0.1.0)
