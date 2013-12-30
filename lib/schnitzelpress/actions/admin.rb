@@ -9,9 +9,10 @@ module Schnitzelpress
         end
 
         get '/admin/?' do
-          @posts  = Post.published.posts.desc(:published_at)
-          @pages  = Post.published.pages
-          @drafts = Post.drafts
+          @posts  = Schnitzelpress::Model::Post.latest
+          @pages  = Schnitzelpress::Model::Post.published.pages
+          @drafts = Schnitzelpress::Model::Post.drafts
+
           slim :'admin/admin'
         end
 
@@ -21,6 +22,7 @@ module Schnitzelpress
 
         post '/admin/config' do
           config.attributes = params[:config]
+
           if config.save
             redirect '/admin'
           else
@@ -29,37 +31,51 @@ module Schnitzelpress
         end
 
         get '/admin/new/?' do
-          @post = Post.new
+          @post = Schnitzelpress::Model::Post.new
+
           slim :'admin/new'
         end
 
         post '/admin/new/?' do
-          @post = Post.new(params[:post])
-          if @post.save
-            redirect url_for(@post)
+          post = Schnitzelpress::Model::Post.new(params[:post])
+
+          if post.save
+            redirect url_for(post)
           else
+            @post = post
+
             slim :'admin/new'
           end
         end
 
         get '/admin/edit/:id/?' do
-          @post = Post.find(params[:id])
+          @post = Schnitzelpress::Model::Post.get(params[:id])
+
           slim :'admin/edit'
         end
 
         post '/admin/edit/:id/?' do
-          @post = Post.find(params[:id])
-          @post.attributes = params[:post]
-          if @post.save
-            redirect url_for(@post)
+          post = Schnitzelpress::Model::Post.get(params[:id])
+          post.update(params[:post])
+
+          if post.save
+            redirect url_for(post)
           else
+            @post = post
+
+            post.errors.each do |error|
+              puts "Error '#{error}'"
+            end
+
+
             slim :'admin/edit'
           end
         end
 
         delete '/admin/edit/:id/?' do
-          @post = Post.find(params[:id])
-          @post.destroy
+          post = Schnitzelpress::Model::Post.get(params[:id])
+          post.destroy
+
           redirect '/admin'
         end
       end

@@ -64,7 +64,7 @@ module Schnitzelpress
       }.merge(options)
 
       options[:name] ||= "#{options[:class_name]}[#{attribute}]"
-      options[:id] ||= object.new_record? ?
+      options[:id] ||= object.new? ?
         "new_#{options[:class_name]}_#{attribute}" :
         "#{options[:class_name]}_#{object.id}_#{attribute}"
       options[:class] ||= "#{options[:class_name]}_#{attribute}"
