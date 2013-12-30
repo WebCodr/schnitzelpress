@@ -18,18 +18,43 @@ module Schnitzelpress
 
       validates_presence_of :blog_title, :author_name
 
+      # Create or return config instance from ID schnitzelpress
+      #
+      # @return [Schnitzelpress::Model::Config]
+      #
+      # @api private
+      #
       def self.instance
         @instance ||= first_or_create(:id => 'schnitzelpress')
       end
 
+      # Reset instance variable
+      #
+      # @api private
+      #
       def self.forget_instance
         @instance = nil
       end
 
+      # Return a value from instance of given key
+      #
+      # @param [Symbol|String] key
+      #
+      # @api private
+      #
       def self.get(key)
         instance.send(key)
       end
 
+      # Set a value for given key
+      #
+      # @param [Symbol|String] key
+      # @param [String] key
+      #
+      # @return [String]
+      #
+      # @api private
+      #
       def self.set(key, value)
         instance.update(key => value)
 
