@@ -23,7 +23,6 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-html-matchers'
   gem 'database_cleaner'
-  gem 'factory_girl', '~> 2.6.0'
   gem 'ffaker'
   gem 'timecop'
   gem 'shotgun'

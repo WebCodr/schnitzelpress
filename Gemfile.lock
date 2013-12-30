@@ -87,8 +87,6 @@ GEM
       data_objects (= 0.10.13)
     equalizer (0.0.9)
     execjs (2.0.2)
-    factory_girl (2.6.4)
-      activesupport (>= 2.3.9)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     fastercsv (1.5.5)
@@ -218,7 +216,6 @@ DEPENDENCIES
   data_mapper
   database_cleaner
   dm-postgres-adapter
-  factory_girl (~> 2.6.0)
   ffaker
   mbj-assets
   mongoid (~> 3)

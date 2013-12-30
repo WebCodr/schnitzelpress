@@ -11,22 +11,21 @@ require 'rack/test'
 require 'rspec-html-matchers'
 require 'database_cleaner'
 require 'ffaker'
-require 'factory_girl'
-require File.expand_path("../factories.rb", __FILE__)
 require 'timecop'
+require 'factory_helper'
 Timecop.freeze
 
 RSpec.configure do |config|
   config.before(:suite) do
-    DatabaseCleaner[:mongoid].strategy = :truncation
+    DatabaseCleaner[:data_mapper].strategy = :truncation
   end
 
   config.before(:each) do
-    DatabaseCleaner[:mongoid].start
+    DatabaseCleaner[:data_mapper].start
     Schnitzelpress::Config.forget_instance
   end
 
   config.after(:each) do
-    DatabaseCleaner[:mongoid].clean
+    DatabaseCleaner[:data_mapper].clean
   end
 end
