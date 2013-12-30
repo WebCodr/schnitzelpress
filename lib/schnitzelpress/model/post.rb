@@ -14,6 +14,9 @@ module Schnitzelpress
       property :body,             Text, :lazy => false
       property :transformed_body, Text, :lazy => false
 
+      before :valid?, :create_slug
+      validates_with_method :validate_slug
+
       before :save do
         transform_body
       end
@@ -221,12 +224,36 @@ module Schnitzelpress
 
     private
 
+      # Validate slug
+      #
+      # @api private
+      #
+      def validate_slug
+        conflicting_posts = self.class.all(:slug => self.slug)
+
+        if conflicting_posts.length > 0
+          return [false, "Slug '#{self.slug}' already exists!"]
+        end
+
+        true
+      end
+
+      # Create slug for post
+      #
+      # @api private
+      #
+      def create_slug
+        unless self.slug
+          self.slug = title.parameterize
+        end
+      end
+
       # Transform body markdown source into HTML
       #
       # @api private
       #
       def transform_body
-        transformed_body = transform_markdown(body)
+        self.transformed_body = transform_markdown(body)
       end
 
       # Transform given markdown source into HTML with slodown.py
