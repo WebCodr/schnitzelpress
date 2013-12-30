@@ -4,9 +4,9 @@ ruby "2.1.0"
 
 gem 'rack'
 gem 'puma'
+gem 'activesupport'
 gem 'sinatra'
 gem 'sinatra-contrib'
-gem 'mongoid', '~> 3'
 gem 'data_mapper'
 gem 'dm-postgres-adapter'
 gem 'omniauth'

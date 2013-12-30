@@ -1,10 +1,12 @@
 require 'sinatra'
+require 'active_support'
+require "active_support/inflector"
+require "active_support/time_with_zone"
 require 'yaml'
 require 'erb'
 require 'slim'
 require 'compass'
 require 'schnitzelstyle'
-require 'mongoid'
 require 'data_mapper'
 require 'chronic'
 require 'slodown_py'
@@ -12,8 +14,6 @@ require 'assets'
 require 'omniauth'
 require 'omniauth-browserid'
 require 'sinatra/content_for'
-
-Mongoid.logger.level = 3
 
 module Schnitzelpress
 
@@ -25,16 +25,6 @@ module Schnitzelpress
   #
   def self.root
     @root ||= Pathname.new(__FILE__).parent.parent.freeze
-  end
-
-  # Return path to Mongoid config file
-  #
-  # @return [Pathname]
-  #
-  # @api private
-  #
-  def self.mongoid_config
-    @mongoid_config ||= root.join('config').join('mongoid.yml')
   end
 
   # Return template path

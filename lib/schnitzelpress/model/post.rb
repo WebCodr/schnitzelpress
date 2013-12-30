@@ -103,9 +103,10 @@ module Schnitzelpress
       # @api private
       #
       def self.for_day(year, month, day)
-        date = Date.new(year, month, day)
+        begin_date = Date.new(year, month, day)
+        end_date = begin_date + 1
 
-        all(:published_at => (date.beginning_of_day)..(date.end_of_day))
+        all(:published_at => (begin_date)..(end_date))
       end
 
       # Test if record is a post

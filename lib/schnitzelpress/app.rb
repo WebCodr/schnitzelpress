@@ -7,8 +7,6 @@ module Schnitzelpress
     helpers Sinatra::ContentFor
     helpers Schnitzelpress::Helpers
 
-    Mongoid.load!(Schnitzelpress.mongoid_config, ENV['RACK_ENV'])
-
     get '/assets/*' do
       Schnitzelpress.assets.assets_handler.call(::Request::Rack.new(request.env)).to_rack_response
     end
