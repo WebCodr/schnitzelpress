@@ -61,6 +61,13 @@ def migrate_config
   puts "Config migrated successfully!" if pg_config.saved?
 end
 
+task :default => [:nothing]
+
+task :nothing do
+  # do nothing
+end
+
 task :migrate do
   migrate_config
+  migrate_posts
 end
