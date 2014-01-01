@@ -14,6 +14,9 @@ require 'omniauth'
 require 'omniauth-browserid'
 require 'sinatra/content_for'
 
+# FIXME remove when ActiveRecord was removed
+I18n.enforce_available_locales = false
+
 module Schnitzelpress
 
   # Return root
