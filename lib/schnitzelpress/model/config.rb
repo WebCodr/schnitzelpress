@@ -6,7 +6,9 @@ module Schnitzelpress
       include DataMapper::Resource
 
       DEFAULT_TITLE    = 'A New Schnitzelpress Blog'.freeze
-      DEFAULT_FOOTER   = 'powered by [Schnitzelpress](http://schnitzelpress.org)'.freeze
+      DEFAULT_FOOTER   = <<-FOOTER.freeze
+              powered by [Schnitzelpress](http://schnitzelpress.org)
+      FOOTER
       DEFAULT_FEED_URL =  '/blog.atom'.freeze
       DEFAULT_AUTHOR   = 'Joe Schnitzel'.freeze
 

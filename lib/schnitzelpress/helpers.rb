@@ -49,17 +49,7 @@ module Schnitzelpress
     end
 
     def form_field(object, attribute, options = {})
-      options = {
-        label: attribute.to_s.humanize.titleize,
-        value: object.send(attribute),
-        errors: object.errors[attribute.to_sym],
-        class_name: object.class.to_s.demodulize.underscore
-      }.merge(options)
-
-      options[:id] ||= form_field_id(object, attribute, options)
-      options[:name] ||= "#{options[:class_name]}[#{attribute}]"
-      options[:class] ||= "#{options[:class_name]}_#{attribute}"
-      options[:type] ||= form_field_type(options[:value])
+      options = form_field_options(object, attribute, options)
 
       partial(
         'form_field',
@@ -67,6 +57,22 @@ module Schnitzelpress
         attribute: attribute,
         options: options
       )
+    end
+
+    def form_field_options(object, attribute, options)
+      options = {
+          label: attribute.to_s.humanize.titleize,
+          value: object.send(attribute),
+          errors: object.errors[attribute.to_sym],
+          class_name: object.class.to_s.demodulize.underscore
+      }.merge(options)
+
+      options[:id] ||= form_field_id(object, attribute, options)
+      options[:name] ||= "#{options[:class_name]}[#{attribute}]"
+      options[:class] ||= "#{options[:class_name]}_#{attribute}"
+      options[:type] ||= form_field_type(options[:value])
+
+      options
     end
 
     def form_field_id(object, attribute, options)
@@ -90,18 +96,17 @@ module Schnitzelpress
 
     def icon(name)
       map = Fixture::FontAwesomeCharMap.all
-      name = name.gsub('-', '_')
       char = map.fetch(name, 'f06a')
 
       "<span class=\"font-awesome\">&#x#{char};</span>"
     end
 
     def link_to(title, target = '', options = {})
-      options[:href] = target.respond_to?(:to_url) ? target.to_url : target
+      options[:href] = target
       options[:data] ||= {}
       [:method, :confirm].each { |a| options[:data][a] = options.delete(a) }
 
-      slim "a(href=\"#{options[:href]}\" data-method=\"#{options[:data][:method]}\" data-confirm=\"#{options[:data][:confirm]}\") #{title}"
+      partial(:link_to, options: options, title: title)
     end
 
     def link_to_delete_post(title, post)

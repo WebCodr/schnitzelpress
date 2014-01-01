@@ -59,7 +59,7 @@ module Schnitzelpress
 
           slim :post
         end
-        
+
       end
     end
   end

@@ -100,7 +100,9 @@ module Schnitzelpress
         Sass::Engine.const_set(:DEFAULT_OPTIONS, options.freeze)
       end
 
-      Sass.load_paths.concat(Compass::Configuration::Data.new('foo').sass_load_paths)
+      compass_config = Compass::Configuration::Data.new('foo')
+
+      Sass.load_paths.concat(compass_config.sass_load_paths)
       Sass.load_paths << ASSETS_DIR.join('stylesheets')
     end
 
@@ -110,7 +112,9 @@ module Schnitzelpress
     #
     def add_css_rules
       rules << ::Assets::Builder.run('application.css') do |builder|
-        builder.append assets_repository.compile('stylesheets/schnitzelpress.sass')
+        builder.append(
+          assets_repository.compile('stylesheets/schnitzelpress.sass')
+        )
       end
     end
 
@@ -132,11 +136,8 @@ module Schnitzelpress
     # @api private
     #
     def add_image_rules
-      Pathname.glob(ASSETS_DIR.join('images/**/*')).each do |name|
-        rules << assets_repository.file(name.relative_path_from(ASSETS_DIR))
-      end
-
-      Pathname.glob(ASSETS_DIR.join('images/**/*.{jpg,png,gif,ico}')).each do |name|
+      image_paths = ASSETS_DIR.join('images/**/*.{jpg,png,gif,ico}')
+      Pathname.glob(image_paths).each do |name|
         rules << assets_repository.file(name.relative_path_from(ASSETS_DIR))
       end
     end
