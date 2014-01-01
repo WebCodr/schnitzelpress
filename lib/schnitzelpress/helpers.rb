@@ -71,7 +71,7 @@ module Schnitzelpress
 
       options[:type] ||= case options[:value]
         when DateTime, Time, Date then :datetime
-        when Boolean, FalseClass, TrueClass then :boolean
+        when FalseClass, TrueClass then :boolean
         else :text
       end
 
