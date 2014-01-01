@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'adamantium'
 require 'active_support'
-require "active_support/inflector"
+require 'active_support/inflector'
 require 'yaml'
 require 'erb'
 require 'slim'
@@ -15,12 +15,12 @@ require 'omniauth'
 require 'omniauth-browserid'
 require 'sinatra/content_for'
 
-# FIXME remove when ActiveRecord was removed
+# FIXME: remove when ActiveRecord was removed
 I18n.enforce_available_locales = false
 
+# Schnitzelpress base
 module Schnitzelpress
-
-  # Return root
+  # Return root path
   #
   # @return [Pathname]
   #
@@ -28,6 +28,16 @@ module Schnitzelpress
   #
   def self.root
     @root ||= Pathname.new(__FILE__).parent.parent.freeze
+  end
+
+  # Return config path
+  #
+  # @return [Pathname]
+  #
+  # @api private
+  #
+  def self.config
+    @config ||= root.join('config')
   end
 
   # Return template path
@@ -59,7 +69,6 @@ module Schnitzelpress
   def self.assets
     @assets ||= Schnitzelpress::Assets.new
   end
-
 end
 
 require 'schnitzelpress/environment'

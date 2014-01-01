@@ -1,19 +1,19 @@
 module Schnitzelpress
+  # DataMapper setup
   class Database
-
-    # Sets up database connect, finalizes the models and starts migration
+    # Set up database connect, finalizes the models and starts migration
     #
     # @api private
     #
     def self.setup(environment)
-      uri = self.config.fetch(environment.to_s).fetch('uri')
+      uri = config.fetch(environment.to_s).fetch('uri')
       DataMapper::Logger.new($stdout, :fatal)
       DataMapper.setup(:default, uri)
       DataMapper.finalize
       DataMapper.auto_upgrade!
     end
 
-  private
+    private
 
     # Retrieve and return database config
     #
@@ -32,8 +32,7 @@ module Schnitzelpress
     # @api private
     #
     def self.config_file
-      @config_file ||= Schnitzelpress.root.join('config').join('schnitzelpress.yml')
+      @config_file ||= Schnitzelpress.config.join('schnitzelpress.yml')
     end
-
   end
 end

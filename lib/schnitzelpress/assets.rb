@@ -1,6 +1,6 @@
 module Schnitzelpress
+  # Asset class
   class Assets
-
     ASSETS_DIR = Schnitzelpress.root.join('assets').freeze
 
     # Constructor
@@ -28,7 +28,7 @@ module Schnitzelpress
       @assets_handler ||= ::Assets::Handler.new(assets_environment, '/assets/')
     end
 
-  private
+    private
 
     # Return rules
     #
@@ -66,17 +66,17 @@ module Schnitzelpress
     #
     def configure_compass
       Compass.configuration do |config|
-        config.http_path = "/assets"
+        config.http_path = '/assets'
         config.project_path = ASSETS_DIR
-        config.css_dir = "stylesheets"
-        config.sass_dir = "stylesheets"
-        config.images_dir = "images"
-        config.javascripts_dir = "javascripts"
-        config.fonts_dir = "fonts"
-        config.http_javascripts_dir = "javascripts"
-        config.http_stylesheets_dir = "stylesheets"
-        config.http_images_dir = "images"
-        config.http_fonts_dir = "fonts"
+        config.css_dir = 'stylesheets'
+        config.sass_dir = 'stylesheets'
+        config.images_dir = 'images'
+        config.javascripts_dir = 'javascripts'
+        config.fonts_dir = 'fonts'
+        config.http_javascripts_dir = 'javascripts'
+        config.http_stylesheets_dir = 'stylesheets'
+        config.http_images_dir = 'images'
+        config.http_fonts_dir = 'fonts'
       end
     end
 
@@ -87,14 +87,15 @@ module Schnitzelpress
     def configure_sass
       # Ugly hack for Vagrant on Windows hosts
       #
-      # On Windows hosts the SASS cache cannot be in the shared directory of Vagrant
-      # SASS throws an error that cache files are busy due to shared folder behaviour of Virtual Box
+      # On Windows hosts the SASS cache cannot be in the shared directory
+      # of Vagrant
+      # SASS throws an error that cache files are busy due to shared folder
+      # behaviour of Virtual Box
       # and SASS cannot compile the stylesheets
 
       if ENV['VAGRANT_WINDOWS_HOST']
         options = Sass::Engine::DEFAULT_OPTIONS.dup
         options[:cache_location] = '/tmp/.sass-sache'
-        #Sass::Engine::DEFAULT_OPTIONS.replace(options.freeze)
         Sass::Engine.const_set(:DEFAULT_OPTIONS, options.freeze)
       end
 

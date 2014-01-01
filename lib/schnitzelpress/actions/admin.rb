@@ -1,5 +1,6 @@
 module Schnitzelpress
   module Actions
+    # Route definitions for Admin
     module Admin
       extend ActiveSupport::Concern
 
@@ -44,6 +45,10 @@ module Schnitzelpress
           else
             @post = post
 
+            post.errors.each do |error|
+              puts "Error '#{error}'"
+            end
+
             slim :'admin/new'
           end
         end
@@ -66,7 +71,6 @@ module Schnitzelpress
             post.errors.each do |error|
               puts "Error '#{error}'"
             end
-
 
             slim :'admin/edit'
           end

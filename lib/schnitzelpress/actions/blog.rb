@@ -1,5 +1,6 @@
 module Schnitzelpress
   module Actions
+    # Route definitions for Blog
     module Blog
       extend ActiveSupport::Concern
 
@@ -12,11 +13,13 @@ module Schnitzelpress
           content_type 'application/atom+xml; charset=utf-8'
           @posts = Schnitzelpress::Model::Post.latest.limit(10)
 
-          slim :atom, :format => :xhtml, :layout => false
+          slim :atom, format: :xhtml, layout: false
         end
 
         get '/:year/:month/:day/:slug/?' do |year, month, day, slug|
-          @post = Schnitzelpress::Model::Post.for_day(year.to_i, month.to_i, day.to_i).all(:slug => slug).first
+          @post = Schnitzelpress::Model::Post
+            .for_day(year.to_i, month.to_i, day.to_i)
+            .all(slug: slug).first
 
           render_post
         end
@@ -27,12 +30,14 @@ module Schnitzelpress
 
         def render_blog
           @posts = Schnitzelpress::Model::Post.latest.limit(10).skip(skipped)
-
-          displayed_count = @posts.length
-          @show_previous_posts_button = Schnitzelpress::Model::Post.posts.count > skipped + displayed_count
+          @show_previous_posts_button = show_previous_button?(@posts)
           @show_description = true
 
           render_posts
+        end
+
+        def show_previous_button?(posts)
+          Schnitzelpress::Model::Post.posts.count > (skipped + posts.length)
         end
 
         def render_posts
@@ -48,13 +53,8 @@ module Schnitzelpress
         end
 
         def render_post
-          unless post_exists?(@post)
-            return halt 404
-          end
-
-          unless requested_canonical_url?(@post)
-            #return redirect url_for(@post)
-          end
+          return halt 404 unless post_exists?(@post)
+          return redirect url_for(@post) unless requested_canonical_url?(@post)
 
           slim :post
         end

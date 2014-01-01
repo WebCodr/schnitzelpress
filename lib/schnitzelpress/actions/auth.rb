@@ -1,5 +1,6 @@
 module Schnitzelpress
   module Actions
+    # Route definitions for Auth
     module Auth
       extend ActiveSupport::Concern
 
@@ -7,16 +8,16 @@ module Schnitzelpress
         use OmniAuth::Builder do
           provider :browser_id
           if Schnitzelpress.env.development?
-            provider :developer , :fields => [:email], :uid_field => :email
+            provider :developer , fields: [:email], uid_field: :email
           end
         end
 
         post '/auth/:provider/callback' do
           auth = request.env['omniauth.auth']
-          session[:auth] = {:provider => auth['provider'], :uid => auth['uid']}
+          session[:auth] = { provider: auth['provider'], uid: auth['uid'] }
 
           if admin_logged_in?
-            response.set_cookie('show_admin', :value => true, :path => '/')
+            response.set_cookie('show_admin', value: true, path: '/')
             redirect '/admin/'
           else
             redirect '/'

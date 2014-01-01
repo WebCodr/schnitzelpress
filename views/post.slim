@@ -1,6 +1,6 @@
-- set_page_title @post.title.presence
+- @page_title = @post.title.presence
 
-== partial @post, :complete => true
+== partial :post, :post => @post, :complete => true
 
 - if @extra_posts
   section.extra_posts

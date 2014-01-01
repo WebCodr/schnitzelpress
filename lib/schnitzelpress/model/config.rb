@@ -1,20 +1,26 @@
 module Schnitzelpress
   module Model
+    # Config model
     class Config
       include DataMapper::Resource
 
-      property :id,                  String, :key => true
+      DEFAULT_TITLE    = 'A New Schnitzelpress Blog'.freeze
+      DEFAULT_FOOTER   = 'powered by [Schnitzelpress](http://schnitzelpress.org)'.freeze
+      DEFAULT_FEED_URL =  '/blog.atom'.freeze
+      DEFAULT_AUTHOR   = 'Joe Schnitzel'.freeze
+
+      property :id, String, key: true
       timestamps :at
-      property :blog_title,          String, :default => "A New Schnitzelpress Blog"
-      property :blog_description,    Text, :default => ""
-      property :blog_footer,         Text, :default => "powered by [Schnitzelpress](http://schnitzelpress.org)"
-      property :blog_feed_url,       String, :default => "/blog.atom"
-      property :author_name,         String, :default => "Joe Schnitzel"
-      property :disqus_id,           String
+      property :blog_title, String, default: DEFAULT_TITLE
+      property :blog_description, Text, default: ''
+      property :blog_footer, Text, default: DEFAULT_FOOTER
+      property :blog_feed_url, String, default: DEFAULT_FEED_URL
+      property :author_name, String, default: DEFAULT_AUTHOR
+      property :disqus_id, String
       property :google_analytics_id, String
-      property :gauges_id,           String
-      property :gosquared_id,        String
-      property :twitter_id,          String
+      property :gauges_id, String
+      property :gosquared_id, String
+      property :twitter_id, String
 
       validates_presence_of :blog_title, :author_name
 
@@ -25,7 +31,7 @@ module Schnitzelpress
       # @api private
       #
       def self.instance
-        @instance ||= first_or_create(:id => 'schnitzelpress')
+        @instance ||= first_or_create(id: 'schnitzelpress')
       end
 
       # Reset instance variable

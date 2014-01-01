@@ -1,18 +1,19 @@
 module Schnitzelpress
   module Model
+    # Post model
     class Post
       include DataMapper::Resource
 
-      property :id,               Serial
+      property :id, Serial
       timestamps :at
-      property :published_at,     DateTime, :index => true
-      property :type,             Enum[:page, :post], :index => true, :default => :post
-      property :status,           Enum[:draft, :published], :index => true, :default => :draft
-      property :comments,         Boolean, :default => true
-      property :slug,             Slug, :index => true
-      property :title,            String, :length => 150
-      property :body,             Text, :lazy => false
-      property :transformed_body, Text, :lazy => false
+      property :published_at,  DateTime, index: true
+      property :type, Enum[:page, :post], index: true, default: :post
+      property :status, Enum[:draft, :published], index: true, default: :draft
+      property :comments, Boolean, default: true
+      property :slug, Slug, index: true
+      property :title, String, length: 150
+      property :body, Text, lazy: false
+      property :transformed_body, Text, lazy: false
 
       before :valid?, :create_slug
       validates_presence_of :slug
@@ -29,7 +30,7 @@ module Schnitzelpress
       # @api private
       #
       def self.published
-        all(:status => :published)
+        all(status: :published)
       end
 
       # Scope for drafts
@@ -39,7 +40,7 @@ module Schnitzelpress
       # @api private
       #
       def self.drafts
-        all(:status => :draft)
+        all(status: :draft)
       end
 
       # Scope for pages
@@ -49,7 +50,7 @@ module Schnitzelpress
       # @api private
       #
       def self.pages
-        all(:type => :page)
+        all(type: :page)
       end
 
       # Scope for posts
@@ -59,7 +60,7 @@ module Schnitzelpress
       # @api private
       #
       def self.posts
-        all(:type => :post)
+        all(type: :post)
       end
 
       # Scope for posts ordered by published_at desc
@@ -69,7 +70,7 @@ module Schnitzelpress
       # @api private
       #
       def self.latest
-        published.posts.all(:order => [:published_at.desc])
+        published.posts.all(order: [:published_at.desc])
       end
 
       # Scope for skipping records
@@ -79,7 +80,7 @@ module Schnitzelpress
       # @api private
       #
       def self.skip(offset)
-        all(:offset => offset)
+        all(offset: offset)
       end
 
       # Scope for limiting records
@@ -89,7 +90,7 @@ module Schnitzelpress
       # @api private
       #
       def self.limit(limit)
-        all(:limit => limit)
+        all(limit: limit)
       end
 
       # Return posts for given day
@@ -106,7 +107,7 @@ module Schnitzelpress
         begin_date = Date.new(year, month, day)
         end_date = begin_date + 1
 
-        all(:published_at => (begin_date)..(end_date))
+        all(published_at: (begin_date)..(end_date))
       end
 
       # Test if record is a post
@@ -206,11 +207,13 @@ module Schnitzelpress
       # @api private
       #
       def to_url
-        unless published_at
-          return "/#{slug}/"
-        end
+        return "/#{slug}/" unless published_at
 
-        "/#{sprintf('%04d', year)}/#{sprintf('%02d', month)}/#{sprintf('%02d', day)}/#{slug}/"
+        url_year = sprintf('%04d', year)
+        url_month = sprintf('%02d', month)
+        url_day = sprintf('%02d', day)
+
+        "/#{url_year}/#{url_month}/#{url_day}/#{slug}/"
       end
 
       # Return transformed HTML
@@ -240,17 +243,17 @@ module Schnitzelpress
         super(value)
       end
 
-    private
+      private
 
       # Validate slug
       #
       # @api private
       #
       def validate_slug
-        conflicting_posts = self.class.all(:slug => self.slug)
+        conflicting_posts = self.class.all(slug: slug)
 
-        if conflicting_posts.any? && conflicting_posts.first.id != self.id
-          return [false, "Slug '#{self.slug}' already exists!"]
+        if conflicting_posts.any? && conflicting_posts.first.id != id
+          return [false, "Slug '#{slug}' already exists!"]
         end
 
         true
@@ -261,9 +264,17 @@ module Schnitzelpress
       # @api private
       #
       def create_slug
-        if !self.slug || self.slug.empty?
-          self.slug = title.parameterize
-        end
+        self.slug = title.parameterize unless slug_exists?
+      end
+
+      # Test if slug exists
+      #
+      # @return [Boolean]
+      #
+      # @api private
+      #
+      def slug_exists?
+        slug && !slug.empty?
       end
 
       # Transform body markdown source into HTML
@@ -285,7 +296,6 @@ module Schnitzelpress
       def transform_markdown(source)
         Slodown::Formatter.new(source).complete.to_s
       end
-
     end
   end
 end

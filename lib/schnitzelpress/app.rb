@@ -1,14 +1,16 @@
 module Schnitzelpress
+  # App class
   class App < Sinatra::Base
     set :views, Schnitzelpress.root.join('views')
 
-    use Rack::Session::Cookie, :secret => Random.rand.to_s
+    use Rack::Session::Cookie, secret: Random.rand.to_s
 
     helpers Sinatra::ContentFor
     helpers Schnitzelpress::Helpers
 
     get '/assets/*' do
-      Schnitzelpress.assets.assets_handler.call(::Request::Rack.new(request.env)).to_rack_response
+      rack = ::Request::Rack.new(request.env)
+      Schnitzelpress.assets.assets_handler.call(rack).to_rack_response
     end
 
     include Schnitzelpress::Actions::Auth

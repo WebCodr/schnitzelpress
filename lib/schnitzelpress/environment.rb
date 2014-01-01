@@ -1,4 +1,5 @@
 module Schnitzelpress
+  # Environment class
   class Environment
     include Concord.new(:env_vars)
     include Adamantium::Flat
@@ -14,7 +15,7 @@ module Schnitzelpress
       when 'test', 'development', 'production'
         environment.to_sym
       else
-        raise 'Could not determine current environment!'
+        fail 'Could not determine current environment!'
       end
     end
     memoize :state
@@ -52,9 +53,9 @@ module Schnitzelpress
     end
     memoize :production?
 
-  private
+    private
 
-    # FIXME don't screw up RACK_ENV, use own environmental variable
+    # FIXME: don't screw up RACK_ENV, use own environmental variable
 
     # Return value of RACK_ENV environmental variable
     #
@@ -66,6 +67,5 @@ module Schnitzelpress
       env_vars['RACK_ENV']
     end
     memoize :environment
-
   end
 end
