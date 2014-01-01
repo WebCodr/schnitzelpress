@@ -23,13 +23,16 @@ describe Schnitzelpress::App do
   end
 
   describe 'viewing a single post' do
-    before do
-      create_post(:published_at => "2011-12-10 12:00", :slug => 'slug')
-      get "/2011/12/10/slug/"
-    end
+
+    let(:post) { create_post(:published_at => "2011-12-10 12:00", :slug => 'slug') }
 
     subject { last_response }
 
+    before do
+      get post.to_url
+    end
+
     it { should be_ok }
+    its(:body) { should have_tag 'title', :text => "#{post.title} | #{Schnitzelpress::Model::Config.instance.blog_title}" }
   end
 end
