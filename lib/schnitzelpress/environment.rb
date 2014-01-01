@@ -1,21 +1,23 @@
 module Schnitzelpress
   class Environment
     include Concord.new(:env_vars)
+    include Adamantium::Flat
 
-    # Return current environment
+    # Return environment state
     #
     # @return [Symbol]
     #
     # @api private
     #
     def state
-      case env_vars['RACK_ENV']
+      case environment
       when 'test', 'development', 'production'
-        env_vars['RACK_ENV'].to_sym
+        environment.to_sym
       else
         raise 'Could not determine current environment!'
       end
     end
+    memoize :state
 
     # Test for testing environment
     #
@@ -26,6 +28,7 @@ module Schnitzelpress
     def test?
       state == :test
     end
+    memoize :test?
 
     # Test for development environment
     #
@@ -36,6 +39,7 @@ module Schnitzelpress
     def development?
       state == :development
     end
+    memoize :development?
 
     # Test for production environment
     #
@@ -46,6 +50,22 @@ module Schnitzelpress
     def production?
       state == :production
     end
+    memoize :production?
+
+  private
+
+    # FIXME don't screw up RACK_ENV, use own environmental variable
+
+    # Return value of RACK_ENV environmental variable
+    #
+    # @return [String]
+    #
+    # @api private
+    #
+    def environment
+      env_vars['RACK_ENV']
+    end
+    memoize :environment
 
   end
 end
