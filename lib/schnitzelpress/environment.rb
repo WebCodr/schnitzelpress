@@ -9,11 +9,12 @@ module Schnitzelpress
     # @api private
     #
     def state
-      return :test if test?
-      return :development if development?
-      return :production if production?
-
-      raise 'Could not determine current environment!'
+      case env_vars['RACK_ENV']
+      when 'test', 'development', 'production'
+        env_vars['RACK_ENV'].to_sym
+      else
+        raise 'Could not determine current environment!'
+      end
     end
 
     # Test for testing environment
@@ -23,7 +24,7 @@ module Schnitzelpress
     # @api private
     #
     def test?
-      env_vars['RACK_ENV'] == 'test'
+      state == :test
     end
 
     # Test for development environment
@@ -33,7 +34,7 @@ module Schnitzelpress
     # @api private
     #
     def development?
-      env_vars['RACK_ENV'] == 'development'
+      state == :development
     end
 
     # Test for production environment
@@ -43,7 +44,7 @@ module Schnitzelpress
     # @api private
     #
     def production?
-      env_vars['RACK_ENV'] == 'production'
+      state == :production
     end
 
   end

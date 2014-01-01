@@ -6,39 +6,66 @@ describe Schnitzelpress::Environment do
 
   let(:object) { described_class.new(env_vars) }
 
-  describe '#current rack env test' do
+  describe '#current' do
+
+    describe 'rack env test' do
+      let(:env_vars) { {'RACK_ENV' => 'test'} }
+
+      it { should eql(:test) }
+    end
+
+    describe 'rack env development' do
+      let(:env_vars) { {'RACK_ENV' => 'development'} }
+
+      it { should eql(:development) }
+    end
+
+    describe 'rack env production' do
+      let(:env_vars) { {'RACK_ENV' => 'production'} }
+
+      it { should eql(:production) }
+    end
+
+    describe '#current' do
+
+      let(:env_vars) { {'RACK_ENV' => '<sdfsdfds>'} }
+
+      it 'throws exception on unknown environment' do
+        expect { subject }.to raise_error(RuntimeError, 'Could not determine current environment!')
+      end
+    end
+  end
+
+  describe '#test?' do
 
     let(:env_vars) { {'RACK_ENV' => 'test'} }
 
     specify do
-      should eql(:test)
+      expect(object.test?).to be(true)
+      expect(object.development?).to be(false)
+      expect(object.production?).to be(false)
     end
   end
 
-  describe '#current rack env development' do
-
-    let(:env_vars) { {'RACK_ENV' => 'development'} }
-
-    specify do
-      should eql(:development)
-    end
-  end
-
-  describe '#current rack env production' do
+  describe '#production?' do
 
     let(:env_vars) { {'RACK_ENV' => 'production'} }
 
     specify do
-      should eql(:production)
+      expect(object.test?).to be(false)
+      expect(object.development?).to be(false)
+      expect(object.production?).to be(true)
     end
   end
 
-  describe '#current' do
+  describe '#development?' do
 
-    let(:env_vars) { {'RACK_ENV' => '<sdfsdfds>'} }
+    let(:env_vars) { {'RACK_ENV' => 'development'} }
 
-    it 'throws exception on unknown environment' do
-      expect { subject }.to raise_error(RuntimeError)
+    specify do
+      expect(object.test?).to be(false)
+      expect(object.development?).to be(true)
+      expect(object.production?).to be(false)
     end
   end
 end
