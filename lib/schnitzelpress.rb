@@ -20,6 +20,7 @@ I18n.enforce_available_locales = false
 
 # Schnitzelpress base
 module Schnitzelpress
+
   # Return root path
   #
   # @return [Pathname]
@@ -79,6 +80,7 @@ module Schnitzelpress
   def self.assets
     @assets ||= Schnitzelpress::Assets.new
   end
+
 end
 
 require 'schnitzelpress/environment'

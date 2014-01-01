@@ -1,6 +1,7 @@
 module Schnitzelpress
   # Helper method collection
   module Helpers
+
     def h(*args)
       escape_html(*args)
     end
@@ -111,5 +112,6 @@ module Schnitzelpress
         confirm: 'Are you sure? This can not be undone.'
       )
     end
+
   end
 end

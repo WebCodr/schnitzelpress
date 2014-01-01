@@ -2,6 +2,7 @@ module Schnitzelpress
   module Actions
     # Route definitions for Auth
     module Auth
+
       extend ActiveSupport::Concern
 
       included do
@@ -34,6 +35,7 @@ module Schnitzelpress
 
           redirect '/login'
         end
+
       end
     end
   end

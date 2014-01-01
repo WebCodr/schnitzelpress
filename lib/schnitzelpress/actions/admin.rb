@@ -2,6 +2,7 @@ module Schnitzelpress
   module Actions
     # Route definitions for Admin
     module Admin
+
       extend ActiveSupport::Concern
 
       included do
@@ -82,6 +83,7 @@ module Schnitzelpress
             puts "Error '#{error}'"
           end
         end
+
       end
     end
   end

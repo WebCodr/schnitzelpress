@@ -1,6 +1,7 @@
 module Schnitzelpress
   # App class
   class App < Sinatra::Base
+
     set :views, Schnitzelpress.root.join('views')
 
     use Rack::Session::Cookie, secret: Random.rand.to_s
@@ -28,5 +29,6 @@ module Schnitzelpress
     not_found do
       slim :"404"
     end
+
   end
 end

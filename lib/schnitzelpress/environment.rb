@@ -1,6 +1,7 @@
 module Schnitzelpress
   # Environment class
   class Environment
+
     include Concord.new(:env_vars)
     include Adamantium::Flat
 
@@ -67,5 +68,6 @@ module Schnitzelpress
       env_vars['RACK_ENV']
     end
     memoize :environment
+
   end
 end

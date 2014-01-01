@@ -2,6 +2,7 @@ module Schnitzelpress
   module Actions
     # Route definitions for Blog
     module Blog
+
       extend ActiveSupport::Concern
 
       included do
@@ -58,6 +59,7 @@ module Schnitzelpress
 
           slim :post
         end
+        
       end
     end
   end

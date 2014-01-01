@@ -1,6 +1,7 @@
 module Schnitzelpress
   # Asset class
   class Assets
+
     ASSETS_DIR = Schnitzelpress.root.join('assets').freeze
 
     # Constructor
@@ -149,5 +150,6 @@ module Schnitzelpress
         rules << assets_repository.file(name.relative_path_from(ASSETS_DIR))
       end
     end
+
   end
 end

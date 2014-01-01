@@ -1,6 +1,7 @@
 module Schnitzelpress
   # DataMapper setup
   class Database
+
     # Set up database connect, finalizes the models and starts migration
     #
     # @api private
@@ -34,5 +35,6 @@ module Schnitzelpress
     def self.config_file
       @config_file ||= Schnitzelpress.config.join('schnitzelpress.yml')
     end
+
   end
 end
