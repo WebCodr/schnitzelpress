@@ -5,6 +5,7 @@ ruby "2.1.0"
 gem 'rack'
 gem 'puma'
 gem 'activesupport'
+gem 'adamantium'
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'data_mapper'

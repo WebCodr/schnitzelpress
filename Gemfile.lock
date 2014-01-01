@@ -204,6 +204,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport
+  adamantium
   awesome_print
   chronic
   compass
