@@ -44,10 +44,7 @@ module Schnitzelpress
             redirect url_for(post)
           else
             @post = post
-
-            post.errors.each do |error|
-              puts "Error '#{error}'"
-            end
+            log_save_errors(post)
 
             slim :'admin/new'
           end
@@ -67,10 +64,7 @@ module Schnitzelpress
             redirect url_for(post)
           else
             @post = post
-
-            post.errors.each do |error|
-              puts "Error '#{error}'"
-            end
+            log_save_errors(post)
 
             slim :'admin/edit'
           end
@@ -81,6 +75,12 @@ module Schnitzelpress
           post.destroy
 
           redirect '/admin'
+        end
+
+        def log_save_errors(post)
+          post.errors.each do |error|
+            puts "Error '#{error}'"
+          end
         end
       end
     end
