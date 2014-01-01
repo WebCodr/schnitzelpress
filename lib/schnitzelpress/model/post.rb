@@ -206,6 +206,10 @@ module Schnitzelpress
       # @api private
       #
       def to_url
+        unless published_at
+          return "/#{slug}/"
+        end
+
         "/#{sprintf('%04d', year)}/#{sprintf('%02d', month)}/#{sprintf('%02d', day)}/#{slug}/"
       end
 
