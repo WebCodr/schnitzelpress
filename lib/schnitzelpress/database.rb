@@ -7,6 +7,7 @@ module Schnitzelpress
     #
     def self.setup(environment)
       uri = self.config.fetch(environment.to_s).fetch('uri')
+      DataMapper::Logger.new($stdout, :fatal)
       DataMapper.setup(:default, uri)
       DataMapper.finalize
       DataMapper.auto_upgrade!
