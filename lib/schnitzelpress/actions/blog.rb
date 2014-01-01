@@ -17,7 +17,6 @@ module Schnitzelpress
 
         get '/:year/:month/:day/:slug/?' do |year, month, day, slug|
           @post = Schnitzelpress::Model::Post.for_day(year.to_i, month.to_i, day.to_i).all(:slug => slug).first
-          puts @post.inspect
 
           render_post
         end
