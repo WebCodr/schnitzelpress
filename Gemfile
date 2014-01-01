@@ -30,4 +30,5 @@ group :development, :test do
   gem 'rack-test'
   gem 'watchr'
   gem 'awesome_print'
+  gem 'rubocop'
 end

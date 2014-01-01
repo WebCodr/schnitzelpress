@@ -16,6 +16,7 @@ GEM
       abstract_type (~> 0.0.6)
       adamantium (~> 0.1.0)
       equalizer (~> 0.0.7)
+    ast (1.1.0)
     atomic (1.1.14)
     awesome_print (1.2.0)
     backports (3.4.0)
@@ -121,7 +122,11 @@ GEM
       faraday
       multi_json
       omniauth (~> 1.0)
+    parser (2.1.1)
+      ast (~> 1.1)
+      slop (~> 3.4, >= 3.4.5)
     posix-spawn (0.3.8)
+    powerpack (0.0.9)
     puma (2.7.1)
       rack (>= 1.1, < 2.0)
     pygments.rb (0.5.4)
@@ -132,6 +137,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rainbow (1.99.1)
     rake (10.1.1)
     request (0.0.5)
       abstract_type (~> 0.0.6)
@@ -157,6 +163,10 @@ GEM
       nokogiri (>= 1.4.4)
       rspec (>= 2.0.0)
     rspec-mocks (2.14.4)
+    rubocop (0.16.0)
+      parser (~> 2.1)
+      powerpack (~> 0.0.6)
+      rainbow (>= 1.1.4)
     ruby-oembed (0.8.9)
     sanitize (2.0.6)
       nokogiri (>= 1.4.4)
@@ -188,6 +198,7 @@ GEM
     slodown.py (1.0.1)
       pygments.rb
       slodown
+    slop (3.4.7)
     stringex (1.5.1)
     temple (0.6.7)
     thread_safe (0.1.3)
@@ -221,6 +232,7 @@ DEPENDENCIES
   rake
   rspec
   rspec-html-matchers
+  rubocop
   schnitzelstyle
   shotgun
   sinatra
