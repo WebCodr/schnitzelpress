@@ -40,6 +40,16 @@ module Schnitzelpress
     @config ||= root.join('config')
   end
 
+  # Return fixture path
+  #
+  # @return [Pathname]
+  #
+  # @api private
+  #
+  def self.fixtures
+    @fixtures ||= root.join('fixtures')
+  end
+
   # Return template path
   #
   # @return [Pathname]
@@ -80,6 +90,7 @@ require 'schnitzelpress/actions/blog'
 require 'schnitzelpress/actions/auth'
 require 'schnitzelpress/actions/admin'
 require 'schnitzelpress/assets'
+require 'schnitzelpress/fixture/font_awesome_char_map'
 require 'schnitzelpress/app'
 
 Schnitzelpress::Database.setup(Schnitzelpress.env.state)
