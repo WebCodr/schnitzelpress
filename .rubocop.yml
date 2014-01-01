@@ -1,6 +1,6 @@
 # Avoid parameter lists longer than five parameters.
 ParameterLists:
-  Max: 3
+  Max: 4
   CountKeywordArgs: true
 
 MethodLength:
@@ -55,3 +55,7 @@ Blocks:
 # Allow empty lines around body
 EmptyLinesAroundBody:
   Enabled: false
+
+# Allow more than 100 lines per class, model definitions can be quite long
+ClassLength:
+  Max: 140
