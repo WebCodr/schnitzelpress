@@ -198,7 +198,7 @@ module Schnitzelpress
         class_name: object.class.to_s.demodulize.underscore
       }.merge(options)
 
-      options[:id] ||= form_field_id(object)
+      options[:id] ||= form_field_id(object, attribute, options)
       options[:name] ||= "#{options[:class_name]}[#{attribute}]"
       options[:class] ||= "#{options[:class_name]}_#{attribute}"
       options[:type] ||= form_field_type(options[:value])
@@ -211,7 +211,7 @@ module Schnitzelpress
       )
     end
 
-    def form_field_id(object)
+    def form_field_id(object, attribute, options)
       if object.new?
         "new_#{options[:class_name]}_#{attribute}"
       else
