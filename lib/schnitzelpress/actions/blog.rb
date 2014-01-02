@@ -13,29 +13,6 @@ module Schnitzelpress
           slim :atom, format: :xhtml, layout: false
         end
 
-        get '/:year/:month/:day/:slug/?' do |year, month, day, slug|
-          @post = Schnitzelpress::Model::Post
-            .for_day(year.to_i, month.to_i, day.to_i)
-            .all(slug: slug).first
-
-          render_post
-        end
-
-        def requested_canonical_url?(post)
-          request.path == url_for(post)
-        end
-
-        def post_exists?(post)
-          !!post
-        end
-
-        def render_post
-          return halt 404 unless post_exists?(@post)
-          return redirect url_for(@post) unless requested_canonical_url?(@post)
-
-          slim :post
-        end
-
       end
     end
   end

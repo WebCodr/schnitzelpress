@@ -18,6 +18,10 @@ module Schnitzelpress
       action(:home)
     end
 
+    get '/:year/:month/:day/:slug/?' do |year, month, day, slug|
+      action(:view_post)
+    end
+
     include Schnitzelpress::Actions::Auth
     include Schnitzelpress::Actions::Admin
     include Schnitzelpress::Actions::Blog

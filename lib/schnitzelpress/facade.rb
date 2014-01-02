@@ -13,14 +13,21 @@ module Schnitzelpress
     end
 
     HOME = builder.chain do
-      call Action::Home, INTERNAL_ERROR
-      wrap Presenter::Home
+      call   Action::Home, INTERNAL_ERROR
+      wrap   Presenter::Home
       render View::Template::Home
+    end
+
+    VIEW_POST = builder.chain do
+      call   Action::Post, INTERNAL_ERROR
+      wrap   Presenter::Post
+      render View::Template::Post
     end
 
     define_singleton_method(:dispatcher) do
       builder.dispatcher(Schnitzelpress.env) do
-        dispatch :home, HOME
+        dispatch :home,      HOME
+        dispatch :view_post, VIEW_POST
       end
     end
 
