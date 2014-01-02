@@ -1,3 +1,7 @@
-- if presenter.posts.any?
-  - presenter.posts.each do |post|
-    == partial :post, post: post
+section.posts
+  - if presenter.posts.any?
+    - presenter.posts.each do |post|
+      == partial :post, post: post
+  footer
+    - if presenter.previous_posts_button?
+      a.button href=("/?page=#{presenter.next_page}") View Older Posts
