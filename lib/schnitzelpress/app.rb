@@ -22,9 +22,15 @@ module Schnitzelpress
       action(:view_post)
     end
 
+    get '/blog.atom' do
+      content_type 'application/atom+xml; charset=utf-8'
+      @posts = Schnitzelpress::Model::Post.latest.limit(10)
+
+      slim :atom, format: :xhtml, layout: false
+    end
+
     include Schnitzelpress::Actions::Auth
     include Schnitzelpress::Actions::Admin
-    include Schnitzelpress::Actions::Blog
 
     before do
       # Reload configuration before every request. I know this isn't ideal,
