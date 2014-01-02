@@ -1,14 +1,14 @@
 article.post
   header
     h1
-      a.instapaper_title href=(post.to_url) == post.title
+      a.instapaper_title href=(post.url) == post.title
 
   .instapaper_body
-    == post.to_html
+    == post.content
 
   footer
     p.permalink
-      a href=post.to_url == post.published_at.to_date || "∞"
+      a href=post.url == post.formatted_date
 
     /.social_media_buttons
       - if show_twitter

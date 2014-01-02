@@ -4,7 +4,9 @@ module Schnitzelpress
     class Home < self
 
       def posts
-        response.output
+        response.output.map do |post|
+          Presenter::Post.new(post)
+        end
       end
 
       def page_title
