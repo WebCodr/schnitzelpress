@@ -9,27 +9,77 @@ module Schnitzelpress
     helpers Sinatra::ContentFor
     helpers Schnitzelpress::Helpers
 
-    get '/assets/*' do
-      rack = ::Request::Rack.new(request.env)
-      Schnitzelpress.assets.assets_handler.call(rack).to_rack_response
+    def initialize(app = nil)
+      super(app)
+
+      asset_routes
+      blog_routes
+      auth_routes
+      login_routes
     end
 
-    get '/' do
-      action(:home)
+    def asset_routes
+      self.class.get '/assets/*' do
+        rack = ::Request::Rack.new(request.env)
+        Schnitzelpress.assets.assets_handler.call(rack).to_rack_response
+      end
     end
 
-    get '/:year/:month/:day/:slug/?' do
-      action(:view_post)
+    def blog_routes
+      self.class.get '/' do
+        action(:home)
+      end
+
+      self.class.get '/:year/:month/:day/:slug/?' do
+        action(:view_post)
+      end
+
+      self.class.get '/blog.atom' do
+        content_type 'application/atom+xml; charset=utf-8'
+        @posts = Schnitzelpress::Model::Post.latest.limit(10)
+
+        slim :atom, format: :xhtml, layout: false
+      end
     end
 
-    get '/blog.atom' do
-      content_type 'application/atom+xml; charset=utf-8'
-      @posts = Schnitzelpress::Model::Post.latest.limit(10)
-
-      slim :atom, format: :xhtml, layout: false
+    def developer_auth
+      self.class.use OmniAuth::Builder do
+        provider :browser_id
+        if Schnitzelpress.env.development?
+          provider :developer , fields: [:email], uid_field: :email
+        end
+      end
     end
 
-    include Schnitzelpress::Actions::Auth
+    def auth_routes
+      developer_auth
+
+      self.class.post '/auth/:provider/callback' do
+        auth = request.env['omniauth.auth']
+        session[:auth] = { provider: auth['provider'], uid: auth['uid'] }
+
+        if admin_logged_in?
+          response.set_cookie('show_admin', value: true, path: '/')
+          redirect '/admin/'
+        else
+          redirect '/'
+        end
+      end
+    end
+
+    def login_routes
+      self.class.get '/login' do
+        slim :login
+      end
+
+      self.class.get '/logout' do
+        session[:auth] = nil
+        response.delete_cookie('show_admin')
+
+        redirect '/login'
+      end
+    end
+
     include Schnitzelpress::Actions::Admin
 
     before do
