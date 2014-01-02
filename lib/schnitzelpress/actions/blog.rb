@@ -6,10 +6,6 @@ module Schnitzelpress
       extend ActiveSupport::Concern
 
       included do
-        get '/' do
-          render_blog
-        end
-
         get '/blog.atom' do
           content_type 'application/atom+xml; charset=utf-8'
           @posts = Schnitzelpress::Model::Post.latest.limit(10)
@@ -23,26 +19,6 @@ module Schnitzelpress
             .all(slug: slug).first
 
           render_post
-        end
-
-        def skipped
-          params[:page].to_i * 10
-        end
-
-        def render_blog
-          @posts = Schnitzelpress::Model::Post.latest.limit(10).skip(skipped)
-          @show_previous_posts_button = show_previous_button?(@posts)
-          @show_description = true
-
-          render_posts
-        end
-
-        def show_previous_button?(posts)
-          Schnitzelpress::Model::Post.posts.count > (skipped + posts.length)
-        end
-
-        def render_posts
-          slim :index
         end
 
         def requested_canonical_url?(post)

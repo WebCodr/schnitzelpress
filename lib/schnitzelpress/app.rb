@@ -14,7 +14,7 @@ module Schnitzelpress
       Schnitzelpress.assets.assets_handler.call(rack).to_rack_response
     end
 
-    get '/home' do
+    get '/' do
       action(:home)
     end
 
