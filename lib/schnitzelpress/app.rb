@@ -37,24 +37,25 @@ module Schnitzelpress
     def action(name, input = params)
       response = Facade.dispatcher.call(name, input)
       output = response.output
+      handle_error(output) unless response.success?
 
-      unless response.success?
-        case output
-        when Substation::Chain::FailureData
-          puts "Catched exception: #{output.exception}: #{output.exception.backtrace.join("\n")}"
-          raise output.exception
-        else
-          puts "Chain #{name.inspect} halted with output: #{output.inspect}"
-          status(400)
+      output.respond_to?(:output) ? output.output : output
+    end
 
-          if output.respond_to?(:print_debug)
-            output.print_debug
-          end
-        end
+    def handle_error(output)
+      case output
+      when Substation::Chain::FailureData
+        exception = output.exception
+        backtrace = exception.backtrace.join("\n")
+        puts "Caught exception: #{exception}: #{backtrace}"
+
+        fail output.exception
+      else
+        puts "Chain #{name.inspect} halted with output: #{output.inspect}"
+        status(400)
+
+        output.print_debug if output.respond_to?(:print_debug)
       end
-
-      output = output.output if output.respond_to?(:output)
-      output
     end
 
   end
