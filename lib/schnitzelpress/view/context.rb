@@ -39,7 +39,17 @@ module Schnitzelpress
       # @api private
       #
       def production?
-        env.production?
+        Schnitzelpress.env.production?
+      end
+
+      # Return Disqus ID
+      #
+      # @return [String]
+      #
+      # @api private
+      #
+      def disqus_id
+        Model::Config.instance.disqus_id
       end
 
     private
