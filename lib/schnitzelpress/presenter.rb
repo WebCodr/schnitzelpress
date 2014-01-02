@@ -24,5 +24,18 @@ module Schnitzelpress
       Model::Config.instance.blog_title
     end
 
+    # Define delegator on output
+    #
+    # @param [Symbol] name
+    #
+    # @api private
+    #
+    def self.define_delegator(name)
+      define_method(name) do
+        response.output.public_send(name)
+      end
+    end
+    private_class_method :define_delegator
+
   end
 end
