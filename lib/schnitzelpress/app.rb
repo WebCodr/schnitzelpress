@@ -18,7 +18,7 @@ module Schnitzelpress
       action(:home)
     end
 
-    get '/:year/:month/:day/:slug/?' do |year, month, day, slug|
+    get '/:year/:month/:day/:slug/?' do
       action(:view_post)
     end
 
