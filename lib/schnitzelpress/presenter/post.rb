@@ -2,9 +2,9 @@ module Schnitzelpress
   class Presenter
     class Post < self
 
-      def title
-        post.title
-      end
+      define_delegator(:title)
+      define_delegator(:comments?)
+      define_delegator(:identifier)
 
       def content
         post.to_html
@@ -18,10 +18,14 @@ module Schnitzelpress
         post.published_at.to_date.strftime('%-d.%-m.%Y')
       end
 
+      def page_title
+        "#{title} | #{super}"
+      end
+
     private
 
       def post
-        response
+        response.output
       end
 
     end
