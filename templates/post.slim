@@ -1,0 +1,5 @@
+== partial :post, :post => presenter, :complete => true
+
+- if presenter.comments?
+  section.disqus
+    == partial :disqus, :disqus_identifier => presenter.identifier

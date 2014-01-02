@@ -36,6 +36,10 @@ module Schnitzelpress
         TEMPLATE = 'home.slim'.freeze
       end
 
+      class Post < self
+        TEMPLATE = 'post.slim'.freeze
+      end
+
     end
 
   end
