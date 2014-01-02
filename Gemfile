@@ -4,6 +4,7 @@ ruby "2.1.0"
 
 gem 'rack'
 gem 'puma'
+gem 'substation', '~> 0.0.10.beta1'
 gem 'activesupport'
 gem 'adamantium'
 gem 'sinatra'

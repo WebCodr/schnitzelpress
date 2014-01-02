@@ -200,6 +200,11 @@ GEM
       slodown
     slop (3.4.7)
     stringex (1.5.1)
+    substation (0.0.10.beta2)
+      abstract_type (~> 0.0.5)
+      adamantium (~> 0.1.0)
+      concord (~> 0.1.0)
+      equalizer (~> 0.0.5)
     temple (0.6.7)
     thread_safe (0.1.3)
       atomic
@@ -239,5 +244,6 @@ DEPENDENCIES
   sinatra-contrib
   slim
   slodown.py
+  substation (~> 0.0.10.beta1)
   timecop
   watchr

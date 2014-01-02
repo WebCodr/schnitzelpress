@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'substation'
 require 'adamantium'
 require 'active_support'
 require 'active_support/inflector'
