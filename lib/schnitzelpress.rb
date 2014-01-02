@@ -58,8 +58,8 @@ module Schnitzelpress
   #
   # @api private
   #
-  def templates
-    @template ||= root.join('templates')
+  def self.templates
+    @templates ||= root.join('templates')
   end
 
   # Return environment
@@ -91,11 +91,14 @@ require 'schnitzelpress/model/config'
 require 'schnitzelpress/model/post'
 require 'schnitzelpress/action'
 require 'schnitzelpress/action/noop'
+require 'schnitzelpress/action/home'
 require 'schnitzelpress/actions/blog'
 require 'schnitzelpress/actions/auth'
 require 'schnitzelpress/actions/admin'
 require 'schnitzelpress/error'
 require 'schnitzelpress/presenter'
+require 'schnitzelpress/presenter/home'
+require 'schnitzelpress/view/context'
 require 'schnitzelpress/view'
 require 'schnitzelpress/facade'
 require 'schnitzelpress/assets'

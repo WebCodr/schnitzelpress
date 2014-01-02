@@ -9,30 +9,23 @@ module Schnitzelpress
     end
 
     def call
-      layout.render(Page.new(:content => content), :helper => Helper)
+      layout.render(context, content: content)
+    end
+
+    def context
+      Context.new(presenter: response.output)
     end
 
     def content
-      template.render(response.output, :helper => Helper)
+      template.render(context)
     end
 
     def template(name = self.class::TEMPLATE)
-      Tilt.new(Kickipedia.templates.join(name.to_s).to_s)
+      Tilt.new(Schnitzelpress.templates.join(name.to_s).to_s)
     end
 
     def layout(name = self.class::LAYOUT)
       template(name)
-    end
-
-    class Page
-      include Anima.new(:content)
-    end
-
-    class Helper
-      def self.partial(name, locals = {})
-        locals.store(:helper, Helper)
-        template('partials/' + name.to_s + '.slim').render(nil, locals)
-      end
     end
 
     class Template < self

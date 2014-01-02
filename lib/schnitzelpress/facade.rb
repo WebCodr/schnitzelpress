@@ -11,12 +11,13 @@ module Schnitzelpress
     INTERNAL_ERROR = builder.chain { wrap Schnitzelpress::Error::InternalError }
 
     HOME = builder.chain do
-      call Action::Noop, INTERNAL_ERROR
+      call Action::Home, INTERNAL_ERROR
+      wrap Presenter::Home
       render View::Template::Home
     end
 
     define_singleton_method(:dispatcher) do
-      builder.dispatcher(nil) do
+      builder.dispatcher(Schnitzelpress.env) do
         dispatch :home, HOME
       end
     end

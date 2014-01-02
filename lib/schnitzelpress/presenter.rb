@@ -4,7 +4,7 @@ module Schnitzelpress
     include AbstractType, Adamantium::Flat, Concord.new(:response)
 
     def self.call(response)
-      new(response)
+      new(response.output)
     end
 
     abstract_method :serializable_hash
@@ -14,10 +14,14 @@ module Schnitzelpress
     end
     memoize :json
 
-    private
-
-    def data
-      response.output
+    # Return page title
+    #
+    # @return [String]
+    #
+    # @api private
+    #
+    def page_title
+      Model::Config.instance.blog_title
     end
 
   end
