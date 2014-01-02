@@ -214,7 +214,7 @@ module Schnitzelpress
         url_month = sprintf('%02d', month)
         url_day = sprintf('%02d', day)
 
-        "/#{url_year}/#{url_month}/#{url_day}/#{slug}/"
+        "/#{url_year}/#{url_month}/#{url_day}/#{slug}"
       end
 
       # Return transformed HTML
