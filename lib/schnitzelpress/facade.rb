@@ -8,7 +8,9 @@ module Schnitzelpress
       register :render, Substation::Processor::Transformer::Outgoing
     end
 
-    INTERNAL_ERROR = builder.chain { wrap Schnitzelpress::Error::InternalError }
+    INTERNAL_ERROR = builder.chain do
+      wrap Schnitzelpress::Error::InternalError
+    end
 
     HOME = builder.chain do
       call Action::Home, INTERNAL_ERROR
