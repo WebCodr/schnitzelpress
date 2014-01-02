@@ -197,7 +197,7 @@ module Schnitzelpress
       #
       # @api private
       #
-      def post_identifier
+      def identifier
         "post-#{id}"
       end
 
