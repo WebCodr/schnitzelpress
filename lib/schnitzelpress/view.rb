@@ -42,5 +42,15 @@ module Schnitzelpress
 
     end
 
+    class AdminTemplate < self
+
+      LAYOUT = 'admin/layout.slim'.freeze
+
+      class Home < self
+        TEMPLATE = 'admin/home.slim'.freeze
+      end
+
+    end
+
   end
 end
