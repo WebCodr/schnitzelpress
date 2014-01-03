@@ -12,4 +12,10 @@ feature Schnitzelpress::App, '/assets' do
     expect(page.status_code).to be 200
     expect(body.empty?).to be(false)
   end
+
+  scenario 'requesting admin_application.js' do
+    visit('/assets/admin_application.js')
+    expect(page.status_code).to be 200
+    expect(body.empty?).to be(false)
+  end
 end

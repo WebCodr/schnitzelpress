@@ -125,9 +125,13 @@ module Schnitzelpress
     def add_js_rules
       rules << ::Assets::Builder.run('application.js') do |builder|
         builder.append assets_repository.file('javascripts/jquery-1.7.1.js')
-        builder.append assets_repository.file('javascripts/jquery.cookie.js')
         builder.append assets_repository.file('javascripts/schnitzelpress.js')
-        builder.append assets_repository.file('javascripts/jquery-ujs.js')
+      end
+
+      rules << ::Assets::Builder.run('admin_application.js') do |builder|
+        builder.append assets_repository.file('javascripts/jquery-1.7.1.js')
+        builder.append assets_repository.file('javascripts/schnitzelpress.js')
+        builder.append assets_repository.file('javascripts/angular.min.js')
       end
     end
 
