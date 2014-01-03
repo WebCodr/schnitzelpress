@@ -7,7 +7,7 @@ module Schnitzelpress
     use Rack::Session::Cookie, secret: Random.rand.to_s
 
     helpers Sinatra::ContentFor
-    helpers Schnitzelpress::Helpers
+    helpers Helpers
 
     def initialize(app = nil)
       super(app)
@@ -36,7 +36,7 @@ module Schnitzelpress
 
       self.class.get '/blog.atom' do
         content_type 'application/atom+xml; charset=utf-8'
-        @posts = Schnitzelpress::Model::Post.latest.limit(10)
+        @posts = Model::Post.latest.limit(10)
 
         slim :atom, format: :xhtml, layout: false
       end
@@ -80,7 +80,7 @@ module Schnitzelpress
       end
     end
 
-    include Schnitzelpress::Actions::Admin
+    include Actions::Admin
 
     before do
       # Reload configuration before every request. I know this isn't ideal,

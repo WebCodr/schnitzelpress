@@ -19,7 +19,7 @@ module Schnitzelpress
     end
 
     def config
-      Schnitzelpress::Model::Config.instance
+      Model::Config.instance
     end
 
     def url_for(thing, options = {})

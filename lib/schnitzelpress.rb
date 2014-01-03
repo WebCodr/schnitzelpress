@@ -69,7 +69,7 @@ module Schnitzelpress
   # @api private
   #
   def self.env
-    @env ||= Schnitzelpress::Environment.new(ENV)
+    @env ||= Environment.new(ENV)
   end
 
   # Return assets
@@ -79,7 +79,7 @@ module Schnitzelpress
   # @api private
   #
   def self.assets
-    @assets ||= Schnitzelpress::Assets.new
+    @assets ||= Assets.new
   end
 
 end

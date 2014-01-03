@@ -9,7 +9,7 @@ module Schnitzelpress
     end
 
     INTERNAL_ERROR = builder.chain do
-      wrap Schnitzelpress::Error::InternalError
+      wrap Error::InternalError
     end
 
     HOME = builder.chain do

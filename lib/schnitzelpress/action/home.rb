@@ -29,7 +29,7 @@ module Schnitzelpress
       end
 
       def max_pages
-        (Schnitzelpress::Model::Post.posts.count / 10).ceil
+        (Model::Post.posts.count / 10).ceil
       end
 
     end
