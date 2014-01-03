@@ -20,12 +20,31 @@ module Schnitzelpress
       EXECUTOR = Substation::Processor::Executor.new(decomposer, composer)
     end
 
+    module Deserializer
+      decomposer = lambda do |request|
+        request
+      end
+
+      composer = lambda do |request, output|
+        output.data
+      end
+
+      EXECUTOR = Substation::Processor::Executor.new(decomposer, composer)
+    end
+
     builder = Substation::Environment.build do
+      register(
+        :deserialize,
+        Substation::Processor::Transformer::Incoming,
+        Deserializer::EXECUTOR
+      )
+
       register(
         :authenticate,
         Substation::Processor::Evaluator::Request,
         Authenticator::EXECUTOR
       )
+
       register :call, Substation::Processor::Evaluator::Pivot
       register :wrap, Substation::Processor::Wrapper::Outgoing
       register :render, Substation::Processor::Transformer::Outgoing
@@ -44,9 +63,10 @@ module Schnitzelpress
     end
 
     HOME = builder.chain do
-      call   Action::Home, INTERNAL_ERROR
-      wrap   Presenter::Home
-      render View::Template::Home
+      deserialize Handler::Deserializer::HttpQueryString, INTERNAL_ERROR
+      call        Action::Home, INTERNAL_ERROR
+      wrap        Presenter::Home
+      render      View::Template::Home
     end
 
     VIEW_POST = builder.chain do
