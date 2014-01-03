@@ -21,6 +21,7 @@ gem 'schnitzelstyle'
 gem 'slim'
 gem 'slodown.py'
 gem 'chronic'
+gem 'multi_json'
 
 group :development, :test do
   gem 'rake'

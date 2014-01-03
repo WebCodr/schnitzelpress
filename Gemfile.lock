@@ -247,6 +247,7 @@ DEPENDENCIES
   dm-postgres-adapter
   ffaker
   mbj-assets
+  multi_json
   omniauth
   omniauth-browserid
   poltergeist

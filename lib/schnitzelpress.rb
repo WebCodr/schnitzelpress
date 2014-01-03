@@ -15,6 +15,7 @@ require 'assets'
 require 'omniauth'
 require 'omniauth-browserid'
 require 'sinatra/content_for'
+require 'multi_json'
 
 # FIXME: remove when ActiveRecord was removed
 I18n.enforce_available_locales = false
