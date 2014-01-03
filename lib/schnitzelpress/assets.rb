@@ -132,6 +132,7 @@ module Schnitzelpress
         builder.append assets_repository.file('javascripts/jquery-1.7.1.js')
         builder.append assets_repository.file('javascripts/schnitzelpress.js')
         builder.append assets_repository.file('javascripts/angular.min.js')
+        builder.append assets_repository.compile('javascripts/admin.coffee')
       end
     end
 
