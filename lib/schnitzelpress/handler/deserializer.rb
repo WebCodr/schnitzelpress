@@ -13,6 +13,18 @@ module Schnitzelpress
 
       end
 
+      class JSON < self
+
+        def call
+          unless input.content_type <=> 'application/json'
+            return error(:content_type)
+          end
+
+          success(MultiJson.load(input.body))
+        end
+
+      end
+
     end
   end
 end
