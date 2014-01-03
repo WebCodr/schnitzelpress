@@ -19,7 +19,7 @@ module Schnitzelpress
     end
 
     VIEW_POST = builder.chain do
-      call   Action::Post, INTERNAL_ERROR
+      call   Action::ShowPost, INTERNAL_ERROR
       wrap   Presenter::Post
       render View::Template::Post
     end

@@ -1,7 +1,7 @@
 module Schnitzelpress
   class Action
     # Post action
-    class Post < self
+    class ShowPost < self
 
       private
 
