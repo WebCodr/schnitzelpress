@@ -16,6 +16,7 @@ module Schnitzelpress
       blog_routes
       auth_routes
       login_routes
+      admin_routes
     end
 
     def asset_routes
@@ -80,7 +81,39 @@ module Schnitzelpress
       end
     end
 
-    include Actions::Admin
+    def admin_routes
+      self.class.get '/admin' do
+        action(:admin_home)
+      end
+
+      self.class.get '/admin/config' do
+        action(:admin_config)
+      end
+
+      self.class.post '/admin/config' do
+        action(:admin_save_config)
+      end
+
+      post_routes
+    end
+
+    def post_routes
+      self.class.get '/admin/post' do
+        action(:admin_new_post)
+      end
+
+      self.class.post '/admin/post' do
+        action(:admin_save_post)
+      end
+
+      self.class.put '/admin/post/:id' do
+        action(:admin_save_post)
+      end
+
+      self.class.put '/admin/post/:id' do
+        action(:admin_delete_post)
+      end
+    end
 
     before do
       # Reload configuration before every request. I know this isn't ideal,
@@ -94,15 +127,15 @@ module Schnitzelpress
       slim :"404"
     end
 
-    def action(name, input = params)
+    def action(name, input = request)
       response = Facade.dispatcher.call(name, input)
       output = response.output
-      handle_error(output) unless response.success?
+      handle_error(output, name) unless response.success?
 
       output.respond_to?(:output) ? output.output : output
     end
 
-    def handle_error(output)
+    def handle_error(output, name)
       case output
       when Substation::Chain::FailureData
         exception = output.exception
