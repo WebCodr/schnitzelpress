@@ -133,6 +133,12 @@ module Schnitzelpress
         builder.append assets_repository.file('javascripts/schnitzelpress.js')
         builder.append assets_repository.file('javascripts/angular.min.js')
         builder.append assets_repository.compile('javascripts/admin.coffee')
+
+        controller_dir = ASSETS_DIR.join('javascripts/controller/*.coffee')
+        Pathname.glob(controller_dir).each do |name|
+          file = name.relative_path_from(ASSETS_DIR)
+          builder.append assets_repository.compile(file)
+        end
       end
     end
 
