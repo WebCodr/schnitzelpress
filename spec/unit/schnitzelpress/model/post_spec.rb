@@ -34,7 +34,7 @@ describe Schnitzelpress::Model::Post do
   describe '.latest' do
     it 'should return the latest published posts' do
       5.times { create_post }
-      Schnitzelpress::Model::Post.latest.length == 5
+      Schnitzelpress::Model::Post.latest.size == 5
     end
   end
 
