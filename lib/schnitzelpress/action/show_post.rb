@@ -21,11 +21,11 @@ module Schnitzelpress
       end
 
       def fetch_integer(name)
-        input.fetch(name, 0).to_i
+        params.fetch(name, 0).to_i
       end
 
       def slug
-        input.fetch('slug', '')
+        params.fetch('slug', '')
       end
     end
   end

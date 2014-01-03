@@ -25,7 +25,7 @@ module Schnitzelpress
       end
 
       def current_page
-        input.fetch('page', 0).to_i
+        params.fetch('page', 0).to_i
       end
 
       def max_pages

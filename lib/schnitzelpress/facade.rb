@@ -75,10 +75,9 @@ module Schnitzelpress
     end
 
     HOME = builder.chain do
-      deserialize Handler::Deserializer::HttpQueryString, INTERNAL_ERROR
-      call        Action::Home, INTERNAL_ERROR
-      wrap        Presenter::Home
-      render      View::Template::Home
+      call   Action::Home, INTERNAL_ERROR
+      wrap   Presenter::Home
+      render View::Template::Home
     end
 
     VIEW_POST = builder.chain do

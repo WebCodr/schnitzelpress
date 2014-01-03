@@ -6,7 +6,7 @@ module Schnitzelpress
       class HttpQueryString < self
 
         def call
-          params = Rack::Utils.parse_nested_query(input.query_string)
+          params = Rack::Utils.parse_nested_query(http_request.query_string)
 
           success(params)
         end
@@ -20,7 +20,7 @@ module Schnitzelpress
             return error(:content_type)
           end
 
-          success(MultiJson.load(input.body))
+          success(MultiJson.load(http_request.body))
         end
 
       end

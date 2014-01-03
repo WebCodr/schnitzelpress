@@ -127,7 +127,13 @@ module Schnitzelpress
       slim :"404"
     end
 
-    def action(name, input = request)
+    def action(name)
+      input = Input.new(
+        http_request: request,
+        params: params,
+        state: nil
+      )
+
       response = Facade.dispatcher.call(name, input)
       output = response.output
       handle_error(output, name) unless response.success?

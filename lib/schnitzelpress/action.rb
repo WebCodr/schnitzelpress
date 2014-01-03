@@ -27,8 +27,12 @@ module Schnitzelpress
       request.input
     end
 
-    def session
-      input.session
+    def http_request
+      input.http_request
+    end
+
+    def params
+      input.params
     end
 
     def environment
