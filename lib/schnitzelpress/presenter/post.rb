@@ -6,9 +6,9 @@ module Schnitzelpress
         self.new(OutputWrapper.new(post))
       end
 
-      define_delegator(:title)
-      define_delegator(:comments?)
-      define_delegator(:identifier)
+      define_delegator :title
+      define_delegator :comments?
+      define_delegator :identifier
 
       def content
         post.to_html
