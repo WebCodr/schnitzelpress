@@ -6,7 +6,7 @@ section
 
   p
     a.button#browser_id> href='/auth/browser_id'  Log in with Mozilla Persona
-    - if Schnitzelpress.env.development?
+    - unless Schnitzelpress.env.production?
       a.green.button href='/auth/developer'  Developer Login
 
   form method='post' action='/auth/browser_id/callback' noValidate='noValidate' 
