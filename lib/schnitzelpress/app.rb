@@ -57,14 +57,9 @@ module Schnitzelpress
 
       self.class.post '/auth/:provider/callback' do
         auth = request.env['omniauth.auth']
-        session[:auth] = { provider: auth['provider'], uid: auth['uid'] }
+        session[:uid] = auth['uid']
 
-        if admin_logged_in?
-          response.set_cookie('show_admin', value: true, path: '/')
-          redirect '/admin/'
-        else
-          redirect '/'
-        end
+        redirect '/admin'
       end
     end
 

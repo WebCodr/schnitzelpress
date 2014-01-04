@@ -13,20 +13,16 @@ module Schnitzelpress
 
     private
 
-      def auth?
-        !!auth
+      def uid
+        session[:uid]
       end
 
-      def auth
-        session[:auth]
+      def uid?
+        !!uid
       end
 
       def authenticated?
-        auth? && (uid == ENV['SCHNITZELPRESS_OWNER'])
-      end
-
-      def uid
-        auth[:uid]
+        uid? && (uid == ENV['SCHNITZELPRESS_OWNER'])
       end
 
     end
