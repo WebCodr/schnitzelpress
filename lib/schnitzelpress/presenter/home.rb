@@ -5,7 +5,7 @@ module Schnitzelpress
 
       def posts
         dto.posts.map do |post|
-          Presenter::Post.new(PostWrapper.new(output: post))
+          Presenter::Post.wrap(post)
         end
       end
 
@@ -27,10 +27,6 @@ module Schnitzelpress
 
       def dto
         response.output
-      end
-
-      class PostWrapper
-        include Anima.new(:output)
       end
 
     end

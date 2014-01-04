@@ -2,6 +2,10 @@ module Schnitzelpress
   class Presenter
     class Post < self
 
+      def self.wrap(post)
+        self.new(OutputWrapper.new(post))
+      end
+
       define_delegator(:title)
       define_delegator(:comments?)
       define_delegator(:identifier)
@@ -26,6 +30,10 @@ module Schnitzelpress
 
       def post
         response.output
+      end
+
+      class OutputWrapper
+        include Concord::Public.new(:output)
       end
 
     end
