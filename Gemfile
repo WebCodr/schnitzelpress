@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.1.0"
+ruby "2.0.0"
 
 gem 'rack'
 gem 'puma'
@@ -18,6 +18,7 @@ gem 'schnitzelstyle'
 gem 'slim'
 gem 'slodown.py'
 gem 'chronic'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'rake'
