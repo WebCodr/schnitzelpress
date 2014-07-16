@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-ruby "2.0.0"
-
 gem 'rack'
 gem 'puma'
 gem 'activesupport'
@@ -23,6 +21,7 @@ gem 'newrelic_rpm'
 group :development, :test do
   gem 'rake'
   gem 'rspec'
+  gem 'rspec-its'
   gem 'rspec-html-matchers'
   gem 'database_cleaner'
   gem 'ffaker'

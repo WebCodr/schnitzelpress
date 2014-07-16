@@ -5,6 +5,7 @@ ENV['RACK_ENV'] = 'test'
 
 require 'rubygems'
 require 'bundler/setup'
+require 'rspec/its'
 require 'schnitzelpress'
 require 'awesome_print'
 require 'rack/test'
