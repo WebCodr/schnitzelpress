@@ -127,7 +127,6 @@ module Schnitzelpress
         builder.append assets_repository.file('javascripts/jquery-1.7.1.js')
         builder.append assets_repository.file('javascripts/jquery.cookie.js')
         builder.append assets_repository.file('javascripts/schnitzelpress.js')
-        builder.append assets_repository.file('javascripts/jquery-ujs.js')
       end
     end
 
