@@ -4,7 +4,7 @@ module Schnitzelpress
 
     set :views, Schnitzelpress.root.join('views')
 
-    use Rack::Session::EncryptedCookie, key: 's', secret: ENV['SESSION_SECRET'] || Random.new.bytes(32)
+    use Rack::Session::EncryptedCookie, key: 's', secret: ENV['SESSION_SECRET'] || SecureRandom.hex(32)
 
     helpers Sinatra::ContentFor
     helpers Schnitzelpress::Helpers
