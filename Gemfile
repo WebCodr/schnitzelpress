@@ -17,6 +17,7 @@ gem 'slim'
 gem 'slodown.py'
 gem 'chronic'
 gem 'newrelic_rpm'
+gem 'encrypted_cookie'
 
 group :development, :test do
   gem 'rake'
