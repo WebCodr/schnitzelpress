@@ -2,6 +2,8 @@ services: mongodb
 language: ruby
 before_install:
   - gem install bundler -v '1.7.2'
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq postgresql-server-dev-9.1
 before_script:
   - psql -c 'create database schnitzelpress_test;' -U postgres
 rvm:
