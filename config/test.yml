@@ -1,3 +1,4 @@
 ---
 postgres_url: postgres://schnitzel_test:schnitzel@localhost/schnitzelpress_test
 developer_login: true
+tracking: false

@@ -25,11 +25,11 @@ html
         = 'Footer'
         /!~ markdown config.blog_footer
 
-      /- if production? && config.google_analytics_id.present?
+      - if Schnitzelpress.config.tracking? && config.google_analytics_id.present?
         == partial 'google_analytics'
-      /- if production? && config.gauges_id.present?
+      - if Schnitzelpress.config.tracking? && config.gauges_id.present?
         == partial 'gauges'
-      /- if production? && config.gosquared_id.present?
+      - if Schnitzelpress.config.tracking? && config.gosquared_id.present?
         == partial 'gosquared'
 
     script  type='text/javascript' src=("/assets/application.js" ) 
