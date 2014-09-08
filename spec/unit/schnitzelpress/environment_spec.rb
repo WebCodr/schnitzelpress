@@ -35,37 +35,4 @@ describe Schnitzelpress::Environment do
       end
     end
   end
-
-  describe '#test?' do
-
-    let(:env_vars) { {'SCHNITZEL_ENV' => 'test'} }
-
-    specify do
-      expect(object.test?).to be(true)
-      expect(object.development?).to be(false)
-      expect(object.production?).to be(false)
-    end
-  end
-
-  describe '#production?' do
-
-    let(:env_vars) { {'SCHNITZEL_ENV' => 'production'} }
-
-    specify do
-      expect(object.test?).to be(false)
-      expect(object.development?).to be(false)
-      expect(object.production?).to be(true)
-    end
-  end
-
-  describe '#development?' do
-
-    let(:env_vars) { {'SCHNITZEL_ENV' => 'development'} }
-
-    specify do
-      expect(object.test?).to be(false)
-      expect(object.development?).to be(true)
-      expect(object.production?).to be(false)
-    end
-  end
 end

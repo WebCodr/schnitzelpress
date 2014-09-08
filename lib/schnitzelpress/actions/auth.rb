@@ -8,7 +8,7 @@ module Schnitzelpress
       included do
         use OmniAuth::Builder do
           provider :browser_id
-          if Schnitzelpress.env.development?
+          if Schnitzelpress.config.developer_login?
             provider :developer , fields: [:email], uid_field: :email
           end
         end
