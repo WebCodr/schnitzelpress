@@ -40,8 +40,8 @@ module Schnitzelpress
   #
   # @api private
   #
-  def self.config
-    @config ||= root.join('config')
+  def self.config_path
+    @config_path ||= root.join('config')
   end
 
   # Return fixture path
@@ -84,9 +84,20 @@ module Schnitzelpress
     @assets ||= Schnitzelpress::Assets.new
   end
 
+  # Return config
+  #
+  # @return [Schnitzelpress::Config]
+  #
+  # @api private
+  #
+  def self.config
+    @config ||= Schnitzelpress::Config.load(env.state)
+  end
+
 end
 
 require 'schnitzelpress/environment'
+require 'schnitzelpress/config'
 require 'schnitzelpress/database'
 require 'schnitzelpress/helpers'
 require 'schnitzelpress/model/config'
@@ -98,4 +109,4 @@ require 'schnitzelpress/assets'
 require 'schnitzelpress/fixture/font_awesome_char_map'
 require 'schnitzelpress/app'
 
-Schnitzelpress::Database.setup(Schnitzelpress.env.state)
+Schnitzelpress::Database.setup(Schnitzelpress.config.postgres_url)

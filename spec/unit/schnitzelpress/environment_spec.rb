@@ -9,26 +9,26 @@ describe Schnitzelpress::Environment do
   describe '#current' do
 
     describe 'rack env test' do
-      let(:env_vars) { {'RACK_ENV' => 'test'} }
+      let(:env_vars) { {'SCHNITZEL_ENV' => 'test'} }
 
       it { should eql(:test) }
     end
 
     describe 'rack env development' do
-      let(:env_vars) { {'RACK_ENV' => 'development'} }
+      let(:env_vars) { {'SCHNITZEL_ENV' => 'development'} }
 
       it { should eql(:development) }
     end
 
     describe 'rack env production' do
-      let(:env_vars) { {'RACK_ENV' => 'production'} }
+      let(:env_vars) { {'SCHNITZEL_ENV' => 'production'} }
 
       it { should eql(:production) }
     end
 
     describe '#current' do
 
-      let(:env_vars) { {'RACK_ENV' => '<sdfsdfds>'} }
+      let(:env_vars) { {'SCHNITZEL_ENV' => '<sdfsdfds>'} }
 
       it 'throws exception on unknown environment' do
         expect { subject }.to raise_error(RuntimeError, 'Could not determine current environment!')
@@ -38,7 +38,7 @@ describe Schnitzelpress::Environment do
 
   describe '#test?' do
 
-    let(:env_vars) { {'RACK_ENV' => 'test'} }
+    let(:env_vars) { {'SCHNITZEL_ENV' => 'test'} }
 
     specify do
       expect(object.test?).to be(true)
@@ -49,7 +49,7 @@ describe Schnitzelpress::Environment do
 
   describe '#production?' do
 
-    let(:env_vars) { {'RACK_ENV' => 'production'} }
+    let(:env_vars) { {'SCHNITZEL_ENV' => 'production'} }
 
     specify do
       expect(object.test?).to be(false)
@@ -60,7 +60,7 @@ describe Schnitzelpress::Environment do
 
   describe '#development?' do
 
-    let(:env_vars) { {'RACK_ENV' => 'development'} }
+    let(:env_vars) { {'SCHNITZEL_ENV' => 'development'} }
 
     specify do
       expect(object.test?).to be(false)

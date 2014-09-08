@@ -13,7 +13,7 @@ module Schnitzelpress
     #
     def state
       case environment
-      when 'test', 'development', 'production'
+      when 'test', 'development', 'production', 'circleci', 'travisci'
         environment.to_sym
       else
         fail 'Could not determine current environment!'
@@ -54,18 +54,16 @@ module Schnitzelpress
     end
     memoize :production?
 
-    private
+  private
 
-    # FIXME: don't screw up RACK_ENV, use own environmental variable
-
-    # Return value of RACK_ENV environmental variable
+    # Return value of SCHNITZEL_ENV environmental variable
     #
     # @return [String]
     #
     # @api private
     #
     def environment
-      env_vars['RACK_ENV']
+      env_vars['SCHNITZEL_ENV'] || 'development'
     end
     memoize :environment
 
