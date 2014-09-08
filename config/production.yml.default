@@ -1,2 +1,3 @@
 ---
 postgres_url: <%= ENV['DATABASE_URL'] %>
+developer_login: false

@@ -1,2 +1,3 @@
 ---
 postgres_url: postgres://ubuntu@localhost/circle_test
+developer_login: true
