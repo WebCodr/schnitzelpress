@@ -18,6 +18,7 @@ gem 'slodown.py'
 gem 'chronic'
 gem 'newrelic_rpm'
 gem 'encrypted_cookie'
+gem 'morpher'
 
 group :development, :test do
   gem 'rake'
