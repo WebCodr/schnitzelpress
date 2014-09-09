@@ -17,6 +17,7 @@ require 'sinatra/content_for'
 require 'encrypted_cookie'
 require 'securerandom'
 require 'logger'
+require 'morpher'
 
 # FIXME: remove when ActiveRecord was removed
 I18n.enforce_available_locales = false
