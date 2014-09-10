@@ -32,16 +32,6 @@ module Schnitzelpress
         "<span class=\"font-awesome\">&#x#{char};</span>"
       end
 
-      # Test if environment state is production
-      #
-      # @return [Boolean]
-      #
-      # @api private
-      #
-      def production?
-        Schnitzelpress.env.production?
-      end
-
       # Return Disqus ID
       #
       # @return [String]

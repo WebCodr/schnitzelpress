@@ -47,7 +47,7 @@ module Schnitzelpress
       self.class.use OmniAuth::Builder do
         provider :browser_id
 
-        unless Schnitzelpress.env.production?
+        unless Schnitzelpress.config.developer_login?
           provider :developer , fields: [:email], uid_field: :email
         end
       end
@@ -130,7 +130,7 @@ module Schnitzelpress
         state: nil
       )
 
-      response = Facade.dispatcher.call(name, input)
+      response = Facade::ENV.dispatcher.call(name, input)
       output = response.output
       handle_error(output, name) unless response.success?
 
@@ -139,14 +139,14 @@ module Schnitzelpress
 
     def handle_error(output, name)
       case output
-      when Substation::Chain::FailureData
+      when Substation::Response::Exception::Output
         exception = output.exception
         backtrace = exception.backtrace.join("\n")
         puts "Caught exception: #{exception}: #{backtrace}"
 
         fail output.exception
       else
-        puts "Chain #{name.inspect} halted with output: #{output.inspect}"
+        puts "Chain #{name.inspect} halted with output: #{output.response.output.inspect}"
         status(400)
 
         output.print_debug if output.respond_to?(:print_debug)
