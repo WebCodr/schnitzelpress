@@ -1,9 +1,10 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
-ENV['RACK_ENV'] = 'test'
+ENV['SCHNITZEL_ENV'] ||= 'test'
 ENV['SCHNITZELPRESS_OWNER'] = 'schnitzel@press.de'
 
 require 'bundler/setup'
+require 'rspec/its'
 require 'schnitzelpress'
 require 'awesome_print'
 require 'database_cleaner'

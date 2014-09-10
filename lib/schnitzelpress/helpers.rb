@@ -32,10 +32,6 @@ module Schnitzelpress
       config.disqus_id.present?
     end
 
-    def production?
-      Schnitzelpress.env.production?
-    end
-
     def user_logged_in?
       session[:auth].present?
     end

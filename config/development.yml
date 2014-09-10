@@ -1,0 +1,4 @@
+---
+postgres_url: postgres://schnitzel_dev:schnitzel@localhost/schnitzelpress_dev
+developer_login: true
+tracking: false

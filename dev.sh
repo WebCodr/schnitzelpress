@@ -1,1 +1,1 @@
-SCHNITZELPRESS_OWNER='madcat.me@gmail.com' bundle exec puma
+SCHNITZELPRESS_OWNER='madcat.me@gmail.com' SESSION_SECRET='xee1ahr0zahfooWoosh5aeQuohnohf0U' bundle exec puma

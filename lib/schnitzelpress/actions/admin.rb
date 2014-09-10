@@ -80,7 +80,7 @@ module Schnitzelpress
 
         def log_save_errors(post)
           post.errors.each do |error|
-            puts "Error '#{error}'"
+            Logger.error('Save post', error)
           end
         end
 

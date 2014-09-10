@@ -1,8 +1,0 @@
-database:
-  post:
-    - cp -f config/schnitzelpress.circle.yml config/schnitzelpress.yml
-deployment:
-  staging:
-    branch: master
-    heroku:
-      appname: webcodr

@@ -1,3 +1,0 @@
-test:
-  uri: postgres://postgres@localhost/schnitzelpress_test
-
