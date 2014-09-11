@@ -16,13 +16,13 @@ describe Schnitzelpress::Model::Post do
   end
 
   context 'saving' do
-    context "when no slug is set" do
+    context 'when no slug is set' do
       before { subject.slug = nil }
 
-      context "when a title is available" do
-        before { subject.title = "Team Schnitzel is AWESOME!" }
+      context 'when a title is available' do
+        before { subject.title = 'Team Schnitzel is AWESOME!' }
 
-        it "should set its slug to a sluggified version of its title" do
+        it 'should set its slug to a sluggified version of its title' do
           expect { subject.save }.to change(subject, :slug).
             from(nil).
             to('team-schnitzel-is-awesome')
@@ -39,7 +39,7 @@ describe Schnitzelpress::Model::Post do
   end
 
   context 'date methods' do
-    before { subject.published_at = "2012-01-02 12:23:13" }
+    before { subject.published_at = '2012-01-02 12:23:13' }
     its(:year)  { should == 2012 }
     its(:month) { should == 01 }
     its(:day)   { should == 02 }

@@ -24,7 +24,7 @@ feature Schnitzelpress::App, '/' do
 
   context 'view a single post' do
 
-    let(:post) { create_post(published_at: "2011-12-10 12:00", slug: 'slug') }
+    let(:post) { create_post(published_at: '2011-12-10 12:00', slug: 'slug') }
 
     specify do
       visit(post.to_url)
