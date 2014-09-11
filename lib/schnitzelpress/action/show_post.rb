@@ -2,8 +2,7 @@ module Schnitzelpress
   class Action
     # Post action
     class ShowPost < self
-
-      private
+    private
 
       def call
         post = Model::Post.for_day(*day).all(slug: slug).first
@@ -13,7 +12,6 @@ module Schnitzelpress
         else
           error(:post_not_found)
         end
-
       end
 
       def day

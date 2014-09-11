@@ -21,7 +21,6 @@ module Schnitzelpress
           success(MultiJson.load(http_request.body))
         end
       end
-
     end
   end
 end

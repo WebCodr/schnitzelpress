@@ -3,8 +3,7 @@ module Schnitzelpress
     # Noop class
     # does virtually nothing
     class Noop < self
-
-      private
+    private
 
       def call
         success(input)

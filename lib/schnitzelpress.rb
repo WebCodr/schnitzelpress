@@ -21,7 +21,6 @@ require 'slugify'
 
 # Schnitzelpress base
 module Schnitzelpress
-
   # Return root path
   #
   # @return [Pathname]

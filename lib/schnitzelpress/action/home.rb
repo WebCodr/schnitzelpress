@@ -1,8 +1,7 @@
 module Schnitzelpress
   class Action
     class Home < self
-
-      private
+    private
 
       def call
         posts = Model::Post.latest.limit(10).skip(skipped)

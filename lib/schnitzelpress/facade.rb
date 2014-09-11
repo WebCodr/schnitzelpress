@@ -1,7 +1,6 @@
 module Schnitzelpress
   # Facade module
   module Facade
-
     ENV = Substation::Environment.build(Schnitzelpress.env) do
       register(
         :deserialize,
