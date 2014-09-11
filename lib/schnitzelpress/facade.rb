@@ -44,6 +44,11 @@ module Schnitzelpress
       render View::Template::Post
     end
 
+    ENV.register(:login_form) do
+      call   Action::Noop
+      render View::Template::Login
+    end
+
     ENV.register(:admin_home, AUTHENTICATE_USER) do
       call   Action::Noop, INTERNAL_ERROR
       render View::AdminTemplate::Home

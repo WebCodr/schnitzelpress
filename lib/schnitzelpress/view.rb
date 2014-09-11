@@ -40,6 +40,10 @@ module Schnitzelpress
         TEMPLATE = 'post.slim'.freeze
       end
 
+      class Login < self
+        TEMPLATE = 'login.slim'.freeze
+      end
+
     end
 
     class AdminTemplate < self

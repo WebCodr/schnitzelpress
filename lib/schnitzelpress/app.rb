@@ -66,7 +66,7 @@ module Schnitzelpress
 
     def login_routes
       self.class.get '/login' do
-        slim :login
+        action(:login_form)
       end
 
       self.class.get '/logout' do
