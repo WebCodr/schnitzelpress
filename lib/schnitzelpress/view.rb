@@ -1,7 +1,6 @@
 module Schnitzelpress
   # Views
   class View
-
     include Concord.new(:response)
 
     def self.call(response)
@@ -43,7 +42,6 @@ module Schnitzelpress
       class Login < self
         TEMPLATE = 'login.slim'.freeze
       end
-
     end
 
     class AdminTemplate < self
@@ -53,8 +51,6 @@ module Schnitzelpress
       class Home < self
         TEMPLATE = 'admin/home.slim'.freeze
       end
-
     end
-
   end
 end

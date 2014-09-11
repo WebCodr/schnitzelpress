@@ -1,7 +1,7 @@
 module Schnitzelpress
   class Presenter
+    # Post presenter class
     class Post < self
-
       def self.wrap(post)
         self.new(OutputWrapper.new(post))
       end
@@ -35,7 +35,6 @@ module Schnitzelpress
       class OutputWrapper
         include Concord::Public.new(:output)
       end
-
     end
   end
 end

@@ -1,7 +1,6 @@
 module Schnitzelpress
   # Base class for Actions
   class Action
-
     include AbstractType, Adamantium::Flat, Concord.new(:request)
 
     def self.call(request)
@@ -44,6 +43,5 @@ module Schnitzelpress
     end
 
     abstract_method :call
-
   end
 end

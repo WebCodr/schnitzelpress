@@ -1,5 +1,7 @@
 module Schnitzelpress
   class Action
+    # Noop class
+    # does virtually nothing
     class Noop < self
 
       private
@@ -7,7 +9,6 @@ module Schnitzelpress
       def call
         success(input)
       end
-
     end
   end
 end

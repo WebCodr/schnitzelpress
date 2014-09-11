@@ -2,7 +2,6 @@ module Schnitzelpress
   module Model
     # Config model
     class Config
-
       include DataMapper::Resource
 
       DEFAULT_TITLE    = 'A New Schnitzelpress Blog'.freeze
@@ -69,7 +68,6 @@ module Schnitzelpress
 
         value
       end
-
     end
   end
 end

@@ -1,7 +1,6 @@
 module Schnitzelpress
   # App class
   class App < Sinatra::Base
-
     set :views, Schnitzelpress.root.join('views')
 
     use Rack::Session::EncryptedCookie, key: 's', secret: ENV['SESSION_SECRET'] || SecureRandom.hex(32)
@@ -149,6 +148,5 @@ module Schnitzelpress
         output.print_debug if output.respond_to?(:print_debug)
       end
     end
-
   end
 end

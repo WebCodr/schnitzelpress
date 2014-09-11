@@ -2,7 +2,6 @@ module Schnitzelpress
   module Model
     # Post model
     class Post
-
       include DataMapper::Resource
 
       property :id, Serial
@@ -297,7 +296,6 @@ module Schnitzelpress
       def transform_markdown(source)
         Slodown::Formatter.new(source).complete.to_s
       end
-
     end
   end
 end

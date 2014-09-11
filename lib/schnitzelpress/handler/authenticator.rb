@@ -2,7 +2,6 @@ module Schnitzelpress
   class Handler
     # User authenticator
     class Authenticator < self
-
       def call
         if authenticated?
           success(uid)
@@ -24,7 +23,6 @@ module Schnitzelpress
       def authenticated?
         uid? && (uid == ENV['SCHNITZELPRESS_OWNER'])
       end
-
     end
   end
 end

@@ -12,6 +12,5 @@ module Schnitzelpress
       DataMapper.finalize
       DataMapper.auto_upgrade!
     end
-
   end
 end

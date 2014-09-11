@@ -36,6 +36,5 @@ module Schnitzelpress
       end
     end
     private_class_method :define_delegator
-
   end
 end

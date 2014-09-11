@@ -42,6 +42,5 @@ module Schnitzelpress
 
       evaluator.call(vaLues)
     end
-
   end
 end

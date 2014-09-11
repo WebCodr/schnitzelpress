@@ -67,7 +67,6 @@ module Schnitzelpress
       def partials
         Schnitzelpress.templates.join('partials')
       end
-
     end
   end
 end

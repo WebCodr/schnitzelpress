@@ -2,7 +2,6 @@ module Schnitzelpress
   class Presenter
     # Home presenter
     class Home < self
-
       def posts
         dto.posts.map do |post|
           Presenter::Post.wrap(post)
@@ -28,7 +27,6 @@ module Schnitzelpress
       def dto
         response.output
       end
-
     end
   end
 end

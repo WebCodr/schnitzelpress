@@ -1,9 +1,7 @@
 module Schnitzelpress
   # Environment class
   class Environment
-
-    include Concord.new(:env_vars)
-    include Adamantium::Flat
+    include Concord.new(:env_vars), Adamantium::Flat
 
     # Return environment state
     #
@@ -33,6 +31,5 @@ module Schnitzelpress
       env_vars['SCHNITZEL_ENV'] || 'development'
     end
     memoize :environment
-
   end
 end

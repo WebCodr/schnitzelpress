@@ -1,6 +1,6 @@
 module Schnitzelpress
+  # Handler class
   class Handler
-
     include Adamantium::Flat, Concord.new(:request)
 
     def self.call(request)
@@ -38,6 +38,7 @@ module Schnitzelpress
       Result::Failure.new(output)
     end
 
+    # Result handler class
     class Result
       include Concord::Public.new(:output)
 
@@ -55,6 +56,5 @@ module Schnitzelpress
         STATE = false
       end
     end
-
   end
 end

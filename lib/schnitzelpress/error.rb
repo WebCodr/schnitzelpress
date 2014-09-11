@@ -6,6 +6,5 @@ module Schnitzelpress
     extend Adamantium::Mutable
 
     InternalError = Class.new(self)
-
   end
 end

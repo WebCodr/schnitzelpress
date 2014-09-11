@@ -91,7 +91,6 @@ module Schnitzelpress
   def self.config
     @config ||= Schnitzelpress::Config.load(env.state)
   end
-
 end
 
 require 'schnitzelpress/environment'

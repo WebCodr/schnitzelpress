@@ -14,7 +14,6 @@ module Schnitzelpress
       def self.all
         @all ||= YAML.load_file(Schnitzelpress.fixtures.join(FILE))
       end
-
     end
   end
 end
