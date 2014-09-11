@@ -23,6 +23,7 @@ gem 'multi_json'
 gem 'newrelic_rpm'
 gem 'encrypted_cookie'
 gem 'morpher'
+gem 'slugify'
 
 group :development, :test do
   gem 'rake'

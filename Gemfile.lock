@@ -255,6 +255,7 @@ GEM
       pygments.rb
       slodown
     slop (3.6.0)
+    slugify (1.0.5)
     stringex (1.5.1)
     substation (0.0.10)
       abstract_type (~> 0.0, >= 0.0.7)
@@ -311,5 +312,6 @@ DEPENDENCIES
   sinatra-contrib
   slim
   slodown.py
+  slugify
   substation
   timecop
