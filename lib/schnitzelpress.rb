@@ -1,8 +1,6 @@
 require 'sinatra'
 require 'substation'
 require 'adamantium'
-require 'active_support'
-require 'active_support/inflector'
 require 'yaml'
 require 'erb'
 require 'slim'
@@ -21,9 +19,6 @@ require 'securerandom'
 require 'logger'
 require 'morpher'
 require 'slugify'
-
-# FIXME: remove when ActiveRecord was removed
-I18n.enforce_available_locales = false
 
 # Schnitzelpress base
 module Schnitzelpress
@@ -112,7 +107,6 @@ require 'schnitzelpress/action'
 require 'schnitzelpress/action/noop'
 require 'schnitzelpress/action/home'
 require 'schnitzelpress/action/show_post'
-require 'schnitzelpress/actions/admin'
 require 'schnitzelpress/error'
 require 'schnitzelpress/presenter'
 require 'schnitzelpress/presenter/home'
