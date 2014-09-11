@@ -6,9 +6,6 @@ module Schnitzelpress
 
     use Rack::Session::EncryptedCookie, key: 's', secret: ENV['SESSION_SECRET'] || SecureRandom.hex(32)
 
-    helpers Sinatra::ContentFor
-    helpers Helpers
-
     def initialize(app = nil)
       super(app)
 
