@@ -13,6 +13,7 @@ module Schnitzelpress
       configure_sass
       add_css_rules
       add_js_rules
+      add_admin_js_rules
       add_image_rules
       add_font_rules
       assets_environment
@@ -124,21 +125,41 @@ module Schnitzelpress
     #
     def add_js_rules
       rules << ::Assets::Builder.run('application.js') do |builder|
-        builder.append assets_repository.file('javascripts/jquery-1.7.1.js')
-        builder.append assets_repository.file('javascripts/schnitzelpress.js')
+        add_common_js_rules(builder)
       end
+    end
 
+    # Add JavaScript/CoffeeScript rules for admin area
+    #
+    # @api private
+    #
+    def add_admin_js_rules
       rules << ::Assets::Builder.run('admin_application.js') do |builder|
-        builder.append assets_repository.file('javascripts/jquery-1.7.1.js')
-        builder.append assets_repository.file('javascripts/schnitzelpress.js')
+        add_common_js_rules(builder)
         builder.append assets_repository.file('javascripts/angular.min.js')
         builder.append assets_repository.compile('javascripts/admin.coffee')
+        add_angular_controller_rules(builder)
+      end
+    end
 
-        controller_dir = ASSETS_DIR.join('javascripts/controller/*.coffee')
-        Pathname.glob(controller_dir).each do |name|
-          file = name.relative_path_from(ASSETS_DIR)
-          builder.append assets_repository.compile(file)
-        end
+    # Add common JavaScript rules
+    #
+    # @api private
+    #
+    def add_common_js_rules(builder)
+      builder.append assets_repository.file('javascripts/jquery-1.7.1.js')
+      builder.append assets_repository.file('javascripts/schnitzelpress.js')
+    end
+
+    # Add Angular controller rules
+    #
+    # @api private
+    #
+    def add_angular_controller_rules(builder)
+      controller_dir = ASSETS_DIR.join('javascripts/controller/*.coffee')
+      Pathname.glob(controller_dir).each do |name|
+        file = name.relative_path_from(ASSETS_DIR)
+        builder.append assets_repository.compile(file)
       end
     end
 
