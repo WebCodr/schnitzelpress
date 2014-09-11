@@ -42,6 +42,20 @@ module Schnitzelpress
         Model::Config.instance.disqus_id
       end
 
+      # Return title
+      #
+      # @return [String]
+      #
+      # @api private
+      #
+      def page_title
+        if presenter.respond_to?(:page_title)
+          presenter.page_title
+        else
+          Model::Config.instance.blog_title
+        end
+      end
+
     private
 
       # Return partials path
