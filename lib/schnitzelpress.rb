@@ -20,6 +20,7 @@ require 'encrypted_cookie'
 require 'securerandom'
 require 'logger'
 require 'morpher'
+require 'slugify'
 
 # FIXME: remove when ActiveRecord was removed
 I18n.enforce_available_locales = false

@@ -265,7 +265,7 @@ module Schnitzelpress
       # @api private
       #
       def create_slug
-        self.slug = title.parameterize unless slug_exists?
+        self.slug = Slugify.convert(title) unless slug_exists?
       end
 
       # Test if slug exists
