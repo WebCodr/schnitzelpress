@@ -47,7 +47,7 @@ module Schnitzelpress
       self.class.use OmniAuth::Builder do
         provider :browser_id
 
-        unless Schnitzelpress.config.developer_login?
+        if Schnitzelpress.config.developer_login?
           provider :developer , fields: [:email], uid_field: :email
         end
       end
