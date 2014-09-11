@@ -12,7 +12,7 @@ describe Schnitzelpress::Model::Post do
       subject.slug = 'a-new-slug'
     end
 
-    its(:slug) { should == 'a-new-slug'}
+    its(:slug) { should == 'a-new-slug' }
   end
 
   context 'saving' do
@@ -47,7 +47,7 @@ describe Schnitzelpress::Model::Post do
 
   context 'to_url' do
     it 'should produce double-digit months and days' do
-      post = create_post(:published_at => '2012-1-1 12:00:00', :slug => 'test')
+      post = create_post(published_at: '2012-1-1 12:00:00', slug: 'test')
       post.to_url.should == '/2012/01/01/test'
     end
   end

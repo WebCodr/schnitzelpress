@@ -20,12 +20,11 @@ feature Schnitzelpress::App, '/' do
       expect(page).to have_title "Home | #{blog_title}"
       expect(body).to have_selector('section.posts > article.post', count: 5)
     end
-
   end
 
   context 'view a single post' do
 
-    let(:post) { create_post(:published_at => "2011-12-10 12:00", :slug => 'slug') }
+    let(:post) { create_post(published_at: "2011-12-10 12:00", slug: 'slug') }
 
     specify do
       visit(post.to_url)
@@ -34,6 +33,5 @@ feature Schnitzelpress::App, '/' do
       expect(page).to have_title "#{post.title} | #{blog_title}"
       expect(page).to have_content(post.title)
     end
-
   end
 end
