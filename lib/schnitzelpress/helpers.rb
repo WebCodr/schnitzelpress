@@ -6,12 +6,16 @@ module Schnitzelpress
       escape_html(*args)
     end
 
+    def host
+      env['HTTP_X_FORWARDED_HOST'] || env['HTTP_HOST']
+    end
+
     def find_template(views, name, engine, &block)
       Array(views).each { |v| super(v, name, engine, &block) }
     end
 
     def base_url
-      "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}/"
+      "#{env['rack.url_scheme']}://#{host}/"
     end
 
     def partial(name, locals = {})
