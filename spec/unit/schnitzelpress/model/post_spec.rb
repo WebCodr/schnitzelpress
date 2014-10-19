@@ -32,9 +32,16 @@ describe Schnitzelpress::Model::Post do
   end
 
   describe '.latest' do
-    it 'should return the latest published posts' do
+    before do
       5.times { create_post }
-      Schnitzelpress::Model::Post.latest.size == 5
+    end
+
+    subject do
+      Schnitzelpress::Model::Post.latest
+    end
+
+    it 'should return the latest published posts' do
+      expect(subject.size).to eql(5)
     end
   end
 
@@ -46,9 +53,16 @@ describe Schnitzelpress::Model::Post do
   end
 
   context 'to_url' do
+    subject do
+      post.to_url
+    end
+
+    let(:post) do
+      create_post(published_at: '2012-1-1 12:00:00', slug: 'test')
+    end
+
     it 'should produce double-digit months and days' do
-      post = create_post(published_at: '2012-1-1 12:00:00', slug: 'test')
-      post.to_url.should == '/2012/01/01/test'
+      expect(subject).to eql('/2012/01/01/test')
     end
   end
 end

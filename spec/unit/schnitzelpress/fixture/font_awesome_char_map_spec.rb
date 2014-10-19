@@ -6,11 +6,11 @@ describe Schnitzelpress::Fixture::FontAwesomeCharMap do
 
   describe '#all' do
     it 'should return a Hash' do
-      subject.should be_a(Hash)
+      expect(subject).to be_a(Hash)
     end
 
     it 'should return a Hash with 140 items' do
-      subject.size.should == 140
+      expect(subject.size).to eql(140)
     end
   end
 end
