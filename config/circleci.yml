@@ -1,4 +1,4 @@
 ---
-postgres_url: postgres://ubuntu@localhost/circle_test
+postgres_uri: postgres://ubuntu@localhost/circle_test
 developer_login: true
 tracking: false
