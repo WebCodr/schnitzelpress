@@ -1,35 +1,78 @@
 module Schnitzelpress
   class Action
     class Home < self
-    private
-
+      # Return response
+      #
+      # @return [Substation::Response]
+      #
+      # @api private
+      #
       def call
-        posts = Model::Post.latest.limit(10).skip(skipped)
+        posts = Model::Post.latest.limit(posts_per_page).skip(skipped_posts)
 
-        page = DTO::Page.new(
-          current: current_page,
-          max: max_pages
-        )
-
-        dto = DTO::Home.new(
-          posts: posts,
-          page: page
+        dto = DTO::Page.new(
+          :content    => posts,
+          :pagination => pagination
         )
 
         success(dto)
       end
 
-      def skipped
-        current_page * 10
+    private
+
+      # Return pagination DTO
+      #
+      # @return [DTO::Pagination]
+      #
+      # @api private
+      #
+      def pagination
+        DTO::Pagination.new(
+          :current_page      => current_page,
+          :elements_per_page => posts_per_page,
+          :total_elements    => total_posts
+        )
       end
 
+      # Return numbers of posts per page
+      #
+      # @return [Fixnum]
+      #
+      # @api private
+      #
+      def posts_per_page
+        10
+      end
+
+      # Return number of posts to skip for current page
+      #
+      # @return [Fixnum]
+      #
+      # @api private
+      #
+      def skipped_posts
+        (current_page - 1) * posts_per_page
+      end
+
+      # Return number of current page
+      #
+      # @return [Fixnum]
+      #
+      # @api private
+      #
       def current_page
-        params.fetch('page', 0).to_i
+        params.fetch('page', 1).to_i
       end
 
-      def max_pages
-        (Model::Post.posts.count / 10).ceil
+      # Return number of total pages
+      #
+      # @return [Fixnum]
+      #
+      # @api private
+      #
+      def total_posts
+        Model::Post.posts.count
       end
-    end
-  end
-end
+    end # Home
+  end # Action
+end # Schnitzelpress
