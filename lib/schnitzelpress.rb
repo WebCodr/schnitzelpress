@@ -110,4 +110,4 @@ require 'schnitzelpress/assets'
 require 'schnitzelpress/fixture/font_awesome_char_map'
 require 'schnitzelpress/app'
 
-Schnitzelpress::Database.setup(Schnitzelpress.config.postgres_url)
+Schnitzelpress::Database.setup(Schnitzelpress.config.postgres_uri)

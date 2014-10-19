@@ -1,7 +1,7 @@
 module Schnitzelpress
   # Configuration class
   class Config
-    include Anima.new(:postgres_url, :developer_login, :tracking)
+    include Anima.new(:postgres_uri, :developer_login, :tracking)
 
     def self.load(environment)
       Loader.call(environment)
@@ -74,7 +74,7 @@ module Schnitzelpress
           s(:block,
             s(:guard, s(:primitive, Hash)),
             s(:hash_transform,
-              string_node(:postgres_url),
+              string_node(:postgres_uri),
               boolean_node(:developer_login),
               boolean_node(:tracking)
             ),

@@ -1,4 +1,4 @@
 ---
-postgres_url: <%= ENV['DATABASE_URL'] %>
+postgres_uri: <%= ENV['DATABASE_URL'] %>
 developer_login: false
 tracking: true
