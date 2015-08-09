@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Schnitzelpress::App do
   include Rack::Test::Methods
   include FactoryHelper
+  include RSpecHtmlMatchers
 
   def app
     Schnitzelpress::App

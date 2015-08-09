@@ -17,6 +17,8 @@ require 'factory_helper'
 Timecop.freeze
 
 RSpec.configure do |config|
+  config.include RSpecHtmlMatchers
+
   config.before(:suite) do
     DatabaseCleaner[:data_mapper].strategy = :truncation
   end
