@@ -1,4 +1,4 @@
 ---
-postgres_uri: postgres://schnitzel_test:schnitzel@localhost/schnitzelpress_test
+postgres_uri: postgres://schnitzel_test:schnitzel@127.0.0.1/schnitzelpress_test
 developer_login: true
 tracking: false
